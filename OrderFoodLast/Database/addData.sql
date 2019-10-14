@@ -40,17 +40,17 @@ go
 insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, PromotionPrice,
 					IncludeVAT, Quantity, CategoryID, CreatedDate, CreatedBy, ModifiedDate,
 					ModifiedBy, Status, ViewCounts) values
-(N'Bắp Bò Luộc','mon-hap/bap-bo-luoc',N'','img/BapBoLuoc.jpg',70000,65000,
+(N'Bắp Bò Luộc','mon-hap/bap-bo-luoc',N'','BapBoLuoc.jpg',70000,65000,
 1,50,4,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Cá Diêu Hồng Hấp','mon-hap/ca-dieu-hong-hap',N'','img/CaDieuHongHap.jpg',80000,65000,
+(N'Cá Diêu Hồng Hấp','mon-hap/ca-dieu-hong-hap',N'','CaDieuHongHap.jpg',80000,65000,
 1,50,4,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Cua Hấp','mon-hap/cua-hap',N'','img/CuaHap.jpg',80000,65000,
+(N'Cua Hấp','mon-hap/cua-hap',N'','CuaHap.jpg',80000,65000,
 1,50,4,'2019-10-14',1,'2019-10-14',2,1,20),
-(N'Gà Hấp Hành','mon-hap/ga-hap-hanh',N'','img/GaHapHanh.jpg',150000,140000,
+(N'Gà Hấp Hành','mon-hap/ga-hap-hanh',N'','GaHapHanh.jpg',150000,140000,
 1,50,4,'2019-10-14',1,'2019-10-14',2,1,20),
-(N'Gà Hấp Muối','mon-hap/ga-hap-muoi',N'','img/GaHapMuoi.jpg',150000,140000,
+(N'Gà Hấp Muối','mon-hap/ga-hap-muoi',N'','GaHapMuoi.jpg',150000,140000,
 1,40,4,'2019-10-14',1,'2019-10-14',2,1,20),
-(N'Nghêu Hấp Thái','mon-hap/ngheu-hap-thai',N'','img/NgheuHapThai.jpg',70000,60000,
+(N'Nghêu Hấp Thái','mon-hap/ngheu-hap-thai',N'','NgheuHapThai.jpg',70000,60000,
 1,50,4,'2019-10-14',1,'2019-10-14',2,1,20)
 
 
@@ -59,19 +59,19 @@ go
 insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, PromotionPrice,
 					IncludeVAT, Quantity, CategoryID, CreatedDate, CreatedBy, ModifiedDate,
 					ModifiedBy, Status, ViewCounts) values
-(N'Bắp Xào Bơ','mon-xao/bap-xao-bo',N'','img/BapXaoBo.jpg',20000,15000,
+(N'Bắp Xào Bơ','mon-xao/bap-xao-bo',N'','BapXaoBo.jpg',20000,15000,
 1,60,5,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Lươn Xào Lăn','mon-xao/luon-xao-lan',N'','img/LuonXaoLan.jpg',150000,140000,
+(N'Lươn Xào Lăn','mon-xao/luon-xao-lan',N'','LuonXaoLan.jpg',150000,140000,
 1,60,5,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Mì Xào Bò','mon-xao/mi-xao-bo',N'','img/MyXaoBo.jpg',40000,35000,
+(N'Mì Xào Bò','mon-xao/mi-xao-bo',N'','MyXaoBo.jpg',40000,35000,
 1,60,5,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Mì Xào Hải Sản','mon-xao/mi-xao-hai-san',N'','img/MyXaoHaiSan.jpg',40000,35000,
+(N'Mì Xào Hải Sản','mon-xao/mi-xao-hai-san',N'','MyXaoHaiSan.jpg',40000,35000,
 1,60,5,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Mì Xào Trứng','mon-xao/mi-xao-trung',N'','img/MyXaoTrung.jpg',30000,25000,
+(N'Mì Xào Trứng','mon-xao/mi-xao-trung',N'','MyXaoTrung.jpg',30000,25000,
 1,60,5,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Nui Xào Trứng','mon-xao/mi-xao-trung',N'','img/NuiXaoTrung.jpg',30000,25000,
+(N'Nui Xào Trứng','mon-xao/mi-xao-trung',N'','NuiXaoTrung.jpg',30000,25000,
 1,60,5,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Nui Xào Bò','mon-xao/nui-xao-bo',N'','img/NuiXaoBo.jpg',40000,35000,
+(N'Nui Xào Bò','mon-xao/nui-xao-bo',N'','NuiXaoBo.jpg',40000,35000,
 1,60,5,'2019-10-14',2,'2019-10-14',1,1,20)
 
 
@@ -80,13 +80,13 @@ go
 insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, PromotionPrice,
 					IncludeVAT, Quantity, CategoryID, CreatedDate, CreatedBy, ModifiedDate,
 					ModifiedBy, Status, ViewCounts) values
-(N'Cơm Chiên Dương Châu','mon-chien/com-chien-duong-chau',N'','img/ComChienDuongChau.jpg',40000,35000,
+(N'Cơm Chiên Dương Châu','mon-chien/com-chien-duong-chau',N'','ComChienDuongChau.jpg',40000,35000,
 1,60,6,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Cơm Chiên Xúc Xích','mon-chien/com-chien-xuc-xich',N'','img/ComChienXucXich.jpg',40000,35000,
+(N'Cơm Chiên Xúc Xích','mon-chien/com-chien-xuc-xich',N'','ComChienXucXich.jpg',40000,35000,
 1,60,6,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Cơm Gà Xối Mỡ','mon-chien/com-ga-xoi-mo',N'','img/ComChienXucXich.jpg',50000,40000,
+(N'Cơm Gà Xối Mỡ','mon-chien/com-ga-xoi-mo',N'','ComChienXucXich.jpg',50000,40000,
 1,80,6,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Giò Heo Chiên Giòn','mon-chien/gio-heo-chien-gion',N'','img/GioHeoChienGion.jpg',50000,40000,
+(N'Giò Heo Chiên Giòn','mon-chien/gio-heo-chien-gion',N'','GioHeoChienGion.jpg',50000,40000,
 1,80,6,'2019-10-14',2,'2019-10-14',1,1,20)
 
 
@@ -95,15 +95,15 @@ go
 insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, PromotionPrice,
 					IncludeVAT, Quantity, CategoryID, CreatedDate, CreatedBy, ModifiedDate,
 					ModifiedBy, Status, ViewCounts) values
-(N'Bạch Tuộc Nướng','mon-nuong/bach-tuoc-nuong',N'','img/BachTuocNuong.jpg',50000,45000,
+(N'Bạch Tuộc Nướng','mon-nuong/bach-tuoc-nuong',N'','BachTuocNuong.jpg',50000,45000,
 1,50,7,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Ba Rọi Nướng','mon-nuong/ba-roi-nuong',N'','img/BaRoiNuong.jpg',50000,45000,
+(N'Ba Rọi Nướng','mon-nuong/ba-roi-nuong',N'','BaRoiNuong.jpg',50000,45000,
 1,50,7,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Bò Nướng Lụi','mon-nuong/bo-nuong-lui',N'','img/BoNuongLui.jpg',50000,45000,
+(N'Bò Nướng Lụi','mon-nuong/bo-nuong-lui',N'','BoNuongLui.jpg',50000,45000,
 1,50,7,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Cá Sapa Nướng','mon-nuong/ca-sapa-nuong',N'','img/CaSapaNuong.jpg',50000,45000,
+(N'Cá Sapa Nướng','mon-nuong/ca-sapa-nuong',N'','CaSapaNuong.jpg',50000,45000,
 1,80,7,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Đùi Gà Quay','mon-nuong/dui-ga-quay',N'','img/DuiGaQuay.jpg',50000,45000,
+(N'Đùi Gà Quay','mon-nuong/dui-ga-quay',N'','DuiGaQuay.jpg',50000,45000,
 1,80,7,'2019-10-14',2,'2019-10-14',1,1,20)
 
 
@@ -112,13 +112,13 @@ go
 insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, PromotionPrice,
 					IncludeVAT, Quantity, CategoryID, CreatedDate, CreatedBy, ModifiedDate,
 					ModifiedBy, Status, ViewCounts) values
-(N'Phở Bò','mon-nuoc/dui-ga-quay',N'','img/PhoBo.jpg',40000,35000,
+(N'Phở Bò','mon-nuoc/dui-ga-quay',N'','PhoBo.jpg',40000,35000,
 1,80,8,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Mì Sủi Cảo','mon-nuoc/mi-sui-cao',N'','img/MySuiCao.jpg',40000,35000,
+(N'Mì Sủi Cảo','mon-nuoc/mi-sui-cao',N'','MySuiCao.jpg',40000,35000,
 1,80,8,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Mì Vit Tiem','mon-nuoc/mi-vit-tiem',N'','img/MyVitTiem.jpg',40000,35000,
+(N'Mì Vit Tiem','mon-nuoc/mi-vit-tiem',N'','MyVitTiem.jpg',40000,35000,
 1,80,8,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Súp Cua','mon-nuoc/sup-cua',N'','img/SupCua.jpg',40000,35000,
+(N'Súp Cua','mon-nuoc/sup-cua',N'','SupCua.jpg',40000,35000,
 1,80,8,'2019-10-14',2,'2019-10-14',1,1,20)
 
 
@@ -127,29 +127,29 @@ go
 insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, PromotionPrice,
 					IncludeVAT, Quantity, CategoryID, CreatedDate, CreatedBy, ModifiedDate,
 					ModifiedBy, Status, ViewCounts) values
-(N'CocaCola','do-uong-dong-chai/cocacola',N'','img/CocaCola.jpg',15000,10000,
+(N'CocaCola','do-uong-dong-chai/cocacola',N'','CocaCola.jpg',15000,10000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Pepsi','do-uong-dong-chai/pepsi',N'','img/Pepsi.jpg',15000,10000,
+(N'Pepsi','do-uong-dong-chai/pepsi',N'','Pepsi.jpg',15000,10000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Mirinda Soda Kem','do-uong-dong-chai/mirinda-soda-kem',N'','img/MirindaSodaKem.jpg',15000,10000,
+(N'Mirinda Soda Kem','do-uong-dong-chai/mirinda-soda-kem',N'','MirindaSodaKem.jpg',15000,10000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Mirinda Cam','do-uong-dong-chai/mirinda-cam',N'','img/MirindaCam.jpg',15000,10000,
+(N'Mirinda Cam','do-uong-dong-chai/mirinda-cam',N'','MirindaCam.jpg',15000,10000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Mirinda Sá Xị','do-uong-dong-chai/mirinda-sa-xi',N'','img/MirindaSaxi.jpg',15000,10000,
+(N'Mirinda Sá Xị','do-uong-dong-chai/mirinda-sa-xi',N'','MirindaSaxi.jpg',15000,10000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Bò Húc','do-uong-dong-chai/bo-huc',N'','img/BoHuc.jpg',15000,10000,
+(N'Bò Húc','do-uong-dong-chai/bo-huc',N'','BoHuc.jpg',15000,10000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Sting Dâu','do-uong-dong-chai/sting-dau',N'','img/StingDau.jpg',15000,10000,
+(N'Sting Dâu','do-uong-dong-chai/sting-dau',N'','StingDau.jpg',15000,10000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Sting Vàng','do-uong-dong-chai/sting-vang',N'','img/StingVang.jpg',15000,10000,
+(N'Sting Vàng','do-uong-dong-chai/sting-vang',N'','StingVang.jpg',15000,10000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Heniken','do-uong-dong-chai/heniken',N'','img/Heniken.jpg',20000,15000,
+(N'Heniken','do-uong-dong-chai/heniken',N'','Heniken.jpg',20000,15000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Tiger Nâu','do-uong-dong-chai/tiger-nau',N'','img/TigerNau.jpg',20000,15000,
+(N'Tiger Nâu','do-uong-dong-chai/tiger-nau',N'','TigerNau.jpg',20000,15000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Tiger Bạc','do-uong-dong-chai/tiger-bac',N'','img/TigerBac.jpg',20000,15000,
+(N'Tiger Bạc','do-uong-dong-chai/tiger-bac',N'','TigerBac.jpg',20000,15000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Monster','do-uong-dong-chai/monster',N'','img/Monster.jpg',40000,35000,
+(N'Monster','do-uong-dong-chai/monster',N'','Monster.jpg',40000,35000,
 1,500,9,'2019-10-14',2,'2019-10-14',1,1,20)
 
 
@@ -160,17 +160,17 @@ go
 insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, PromotionPrice,
 					IncludeVAT, Quantity, CategoryID, CreatedDate, CreatedBy, ModifiedDate,
 					ModifiedBy, Status, ViewCounts) values
-(N'Nước Ép Cam','do-uong-tu-lam/nuoc-ep-cam',N'','img/CamEp.jpg',20000,15000,
+(N'Nước Ép Cam','do-uong-tu-lam/nuoc-ep-cam',N'','CamEp.jpg',20000,15000,
 1,500,10,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Nước Ép Ổi','do-uong-tu-lam/nuoc-ep-oi',N'','img/OiEp.jpg',20000,15000,
+(N'Nước Ép Ổi','do-uong-tu-lam/nuoc-ep-oi',N'','OiEp.jpg',20000,15000,
 1,500,10,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Nước Ép Chanh','do-uong-tu-lam/nuoc-ep-chanh',N'','img/ChanhEp.jpg',20000,15000,
+(N'Nước Ép Chanh','do-uong-tu-lam/nuoc-ep-chanh',N'','ChanhEp.jpg',20000,15000,
 1,500,10,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Nước Ép Carot','do-uong-tu-lam/nuoc-ep-carot',N'','img/CarotEp.jpg',20000,15000,
+(N'Nước Ép Carot','do-uong-tu-lam/nuoc-ep-carot',N'','CarotEp.jpg',20000,15000,
 1,500,10,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Nước Ép Cà Chua','do-uong-tu-lam/nuoc-ep-ca-chua',N'','img/CaChuaEp.jpg',20000,15000,
+(N'Nước Ép Cà Chua','do-uong-tu-lam/nuoc-ep-ca-chua',N'','CaChuaEp.jpg',20000,15000,
 1,500,10,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Trà Sữa','do-uong-tu-lam/tra-sua',N'','img/TraSua.jpg',20000,15000,
+(N'Trà Sữa','do-uong-tu-lam/tra-sua',N'','TraSua.jpg',20000,15000,
 1,500,10,'2019-10-14',2,'2019-10-14',1,1,20)
 
 
@@ -181,13 +181,13 @@ go
 insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, PromotionPrice,
 					IncludeVAT, Quantity, CategoryID, CreatedDate, CreatedBy, ModifiedDate,
 					ModifiedBy, Status, ViewCounts) values
-(N'Chè Sâm Bổ Lượng','che/che-sam-bo-luong',N'','img/CheSamBoLuong.jpg',15000,10000,
+(N'Chè Sâm Bổ Lượng','che/che-sam-bo-luong',N'','CheSamBoLuong.jpg',15000,10000,
 1,500,11,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Chè Thái','che/che-thai',N'','img/CheThai.jpg',15000,10000,
+(N'Chè Thái','che/che-thai',N'','CheThai.jpg',15000,10000,
 1,500,11,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Chè Long Nhản','che/che-long-nhan',N'','img/CheLongNhan.jpg',15000,10000,
+(N'Chè Long Nhản','che/che-long-nhan',N'','CheLongNhan.jpg',15000,10000,
 1,500,11,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Chè Khúc Bạch','che/che-khuc-bach',N'','img/CheKhucBach.jpg',15000,10000,
+(N'Chè Khúc Bạch','che/che-khuc-bach',N'','CheKhucBach.jpg',15000,10000,
 1,500,11,'2019-10-14',2,'2019-10-14',1,1,20)
 
 
@@ -198,7 +198,7 @@ insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, Pro
 					IncludeVAT, Quantity, CategoryID, CreatedDate, CreatedBy, ModifiedDate,
 					ModifiedBy, Status, ViewCounts) values
 
-(N'Trai Cây Tô','trai-cay/trai-cay-to',N'','img/TraiCayTo.jpg',20000,15000,
+(N'Trai Cây Tô','trai-cay/trai-cay-to',N'','TraiCayTo.jpg',20000,15000,
 1,500,13,'2019-10-14',2,'2019-10-14',1,1,20)
 
 
@@ -207,11 +207,11 @@ go
 insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, PromotionPrice,
 					IncludeVAT, Quantity, CategoryID, CreatedDate, CreatedBy, ModifiedDate,
 					ModifiedBy, Status, ViewCounts) values
-(N'Su Kem','banh/su-kem',N'','img/SuKem.jpg',15000,10000,
+(N'Su Kem','banh/su-kem',N'','SuKem.jpg',15000,10000,
 1,500,12,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Donut','banh/donut',N'','img/Donut.jpg',15000,10000,
+(N'Donut','banh/donut',N'','Donut.jpg',15000,10000,
 1,500,12,'2019-10-14',2,'2019-10-14',1,1,20),
-(N'Bông Lan Trứng Muối','banh/bong-lan-trung-muoi',N'','img/BongLanTrungMuoi.jpg',15000,10000,
+(N'Bông Lan Trứng Muối','banh/bong-lan-trung-muoi',N'','BongLanTrungMuoi.jpg',15000,10000,
 1,500,12,'2019-10-14',2,'2019-10-14',1,1,20)
 
 
