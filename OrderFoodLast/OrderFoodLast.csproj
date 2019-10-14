@@ -9,6 +9,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Areas\Areas\Controllers\" />
+    <Folder Include="Areas\Areas\Data\" />
+    <Folder Include="Areas\Areas\Models\" />
+    <Folder Include="Areas\Areas\Views\" />
   </ItemGroup>
 
 </Project>
