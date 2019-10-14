@@ -11,10 +11,10 @@ namespace BookStore.Controllers
 {
     public class CartController : Controller
     {
-        private readonly MyDbContext ctx;
+        private readonly OrderFoodContext ctx;
         private readonly IMapper mapper;
         
-        public CartController(MyDbContext db, IMapper _mapper)
+        public CartController(OrderFoodContext db, IMapper _mapper)
         {
             ctx = db; mapper = _mapper;
         }
@@ -45,21 +45,21 @@ namespace BookStore.Controllers
             List<CartItem> carts = Cart;
 
             //tìm xem đã có hàng hóa trong giỏ hàng với mã chọn hay chưa
-            CartItem item = carts.SingleOrDefault(p => p.HangHoa.MaHh == productId);
+            CartItem item = carts.SingleOrDefault(p => p.Product.ProductId == productId);
             if (item != null)//đã có
             {
-                item.SoLuong += qty;
+                item.Quantity += qty;
             }
             else
             {
-                HangHoa hh = ctx.HangHoas.SingleOrDefault(p => p.MaHh == productId);
+                Product hh = ctx.Product.SingleOrDefault(p => p.ProductId == productId);
 
                 if (hh == null)//hàng hóa ko có trong Database
                     return RedirectToAction("Error", "Home");
                 item = new CartItem
                 {
-                    HangHoa = mapper.Map<HangHoaView>(hh),
-                    SoLuong = qty
+                    Product = mapper.Map<ProductView>(hh),
+                    Quantity = qty
                 };
 
                 carts.Add(item);
@@ -72,8 +72,8 @@ namespace BookStore.Controllers
             {
                 return Json(new
                 {
-                    SoLuong = Cart.Sum(p => p.SoLuong),
-                    TongTien = Cart.Sum(p => p.ThanhTien)
+                    SoLuong = Cart.Sum(p => p.Quantity),
+                    TongTien = Cart.Sum(p => p.Total)
                 });
             }
 
@@ -84,7 +84,7 @@ namespace BookStore.Controllers
         {
             List<CartItem> carts = Cart;
 
-            CartItem item = carts.SingleOrDefault(p => p.HangHoa.MaHh == id);
+            CartItem item = carts.SingleOrDefault(p => p.Product.ProductId == id);
             if (item != null)
             {
                 carts.Remove(item);
@@ -96,8 +96,8 @@ namespace BookStore.Controllers
             {
                 return Json(new
                 {
-                    SoLuong = Cart.Sum(p => p.SoLuong),
-                    TongTien = Cart.Sum(p => p.ThanhTien)
+                    SoLuong = Cart.Sum(p => p.Quantity),
+                    TongTien = Cart.Sum(p => p.Total)
                 });
             }
 

@@ -33,8 +33,10 @@ namespace OrderFoodLast
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+#pragma warning disable CS0618 // Type or member is obsolete
             services.AddAutoMapper();
-            services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("MyShopK6")));
+#pragma warning restore CS0618 // Type or member is obsolete
+            services.AddDbContext<OrderFoodContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("MyShopK6")));
 
             services.AddSession(opt => {
                 opt.IdleTimeout = TimeSpan.FromMinutes(5);
