@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+@await Html.PartialAsync("_MyHeader")
+<body>
+    <div class="wrapper">
+        @await Html.PartialAsync("_MyNav")
+        <div class="container">
+            @await Html.PartialAsync("_MyBar")
+
+            <!-- detail-->
+            @await Html.PartialAsync("Confirm")
+            <!-- end detail -->
+
+        </div>
+
+    </div>
+
+</body>
+@await Html.PartialAsync("_MyFooter")
+</html>
