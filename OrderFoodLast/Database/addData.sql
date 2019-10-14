@@ -231,7 +231,6 @@ insert into Customer(UserName, Password, FirstName, LastName, Address, Email, Ph
 
 go
 --insert Orders
-select * from Orders
 insert into Orders(CustomerID, EmployeeID, Comment, OrderStatus,
 				CreatedDate, CreatedBy, ModifiedDate, ModifiedBy, ShipDate)values
 (1,null,N'Giao trước 3h',1,'2019-10-14',null,'2019-10-14',null,null)
