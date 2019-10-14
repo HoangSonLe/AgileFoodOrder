@@ -20,6 +20,7 @@ namespace OrderFoodLast.Models
         public DateTime? ModifiedDate { get; set; }
         public int? ModifiedBy { get; set; }
         public DateTime? ShipDate { get; set; }
+        public int? Total { get; set; }
 
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }

@@ -1,39 +1,38 @@
-﻿<table class="table table-striped">
+﻿@using OrderFoodLast.Areas.Admin.Models
+@model IEnumerable<OrderView>
+@{
+    List<OrderView> list = new List<OrderView>(Model);
+}
+    <table class="table table-striped">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Tên Khách hàng</th>
-            <th scope="col">Mã hóa đơn</th>
-            <th scope="col">Ngày tạo</th>
+            <th scope="col">Mã đơn hàng</th>
+            <th scope="col">Người đặt</th>
+            <th scope="col">Tổng tiền</th>
+            <th scope="col">Ngày đặt</th>
             <th scope="col">Chức năng</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Minh lý</td>
-            <td>13872</td>
-            <td>12/5/2019</td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-check-circle"></i></button>
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    <a href="/Admin/Order/Edit/1" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Kỳ Quốc</td>
-            <td>67256</td>
-            <td>12/5/2019</td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-check-circle"></i></button>
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    <a href="/Admin/Order/Edit/1" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                </div>
-            </td>
-        </tr>
+        @for(int i=0, x=1; i<list.Count; ++i, ++x)
+        {
+            <tr>
+                <th scope="row">@x</th>
+                <td>@list[i].Id</td>
+                <td>@list[i].FullName</td>
+                <td>@list[i].Total VNĐ</td>
+                <td>@list[i].ShipDate</td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary"><i class="fas fa-check-circle"></i></button>
+                        <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
+                        <a href="/Admin/Order/Edit/@list[i].Id" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                    </div>
+                </td>
+            </tr>
+        }
+        
+    
     </tbody>
 </table>

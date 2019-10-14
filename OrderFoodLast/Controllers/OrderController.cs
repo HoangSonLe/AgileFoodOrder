@@ -10,14 +10,14 @@ namespace OrderFoodLast.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
 
-        private readonly OrderFoodContext ctx;
+        private readonly OrderFoodContext _ctx;
 
-        public OrderController(OrderFoodContext _ctx, IMapper _mapper)
+        public OrderController(OrderFoodContext ctx, IMapper mapper)
         {
-            ctx = _ctx;
-            mapper = _mapper;
+            _ctx = ctx;
+            _mapper = mapper;
         }
 
         public IActionResult Index()

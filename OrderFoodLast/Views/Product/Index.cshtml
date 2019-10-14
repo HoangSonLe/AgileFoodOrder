@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Product>
 
-@{ 
+@{
 
-    ViewData.Add("data","Cart");
+    ViewData.Add("data", "Cart");
 }
 <!-- header-area-start -->
 @await Html.PartialAsync("_MyHeader")
 <!-- header-area-end -->
-@await Html.PartialAsync("_Breadcrumbs",viewData: this.ViewData)
+@await Html.PartialAsync("_Breadcrumbs", viewData: this.ViewData)
 <!-- shop-main-area-start -->
 <div class="shop-main-area mb-70">
     <div class="container">
@@ -64,16 +64,16 @@
                                 <div class="col-lg-3 col-md-4 col-sm-6">
                                     <!-- single-product-start -->
                                     <div class="product-wrapper mb-40">
-                                        <div class="product-img"  >
-                                            <a title="@p.ProductName" href="/product/@p.SeoTitle" >
-                                                <img src="@p.ProductImage" alt="book" class="primary" style="width: 160px; height:160px"/>
+                                        <div class="product-img">
+                                            <a title="@p.ProductName" href="/product/@p.SeoTitle">
+                                                <img src="img/@p.ProductImage" alt="book" class="primary" style="width: 160px; height:160px" />
                                             </a>
                                             <div class="quick-view">
                                                 <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
                                                     <i class="fa fa-search-plus"></i>
                                                 </a>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="product-details text-center">
                                             <div class="product-rating">

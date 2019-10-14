@@ -21,7 +21,7 @@ namespace OrderFoodLast.Models
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetail { get; set; }
+        public virtual DbSet<OrderDetail> Order { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductCategory> ProductCategory { get; set; }
@@ -33,10 +33,8 @@ namespace OrderFoodLast.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#pragma warning disable CS1030 // #warning directive
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.;Database=OrderFood;Trusted_Connection=True;");
-#pragma warning restore CS1030 // #warning directive
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS; Database=OrderFood; Trusted_Connection=True;");
             }
         }
 
@@ -78,17 +76,17 @@ namespace OrderFoodLast.Models
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Comment)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__Comment__Custome__33D4B598");
+                    .HasConstraintName("FK__Comment__Custome__3B75D760");
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Comment)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__Comment__Employe__34C8D9D1");
+                    .HasConstraintName("FK__Comment__Employe__3C69FB99");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Comment)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__Comment__Product__32E0915F");
+                    .HasConstraintName("FK__Comment__Product__3A81B327");
             });
 
             modelBuilder.Entity<Contact>(entity =>
@@ -158,12 +156,12 @@ namespace OrderFoodLast.Models
                 entity.HasOne(d => d.Manager)
                     .WithMany(p => p.InverseManager)
                     .HasForeignKey(d => d.ManagerId)
-                    .HasConstraintName("FK__Employee__Manage__15502E78");
+                    .HasConstraintName("FK__Employee__Manage__09DE7BCC");
 
                 entity.HasOne(d => d.RoleNavigation)
                     .WithMany(p => p.Employee)
                     .HasForeignKey(d => d.Role)
-                    .HasConstraintName("FK__Employee__Role__145C0A3F");
+                    .HasConstraintName("FK__Employee__Role__08EA5793");
             });
 
             modelBuilder.Entity<Menu>(entity =>
@@ -179,7 +177,7 @@ namespace OrderFoodLast.Models
                 entity.HasOne(d => d.Parent)
                     .WithMany(p => p.InverseParent)
                     .HasForeignKey(d => d.ParentId)
-                    .HasConstraintName("FK__Menu__ParentID__182C9B23");
+                    .HasConstraintName("FK__Menu__ParentID__0EA330E9");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
@@ -193,18 +191,18 @@ namespace OrderFoodLast.Models
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetail)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__OrderDeta__Order__2F10007B");
+                    .HasConstraintName("FK__OrderDeta__Order__34C8D9D1");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderDetail)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__OrderDeta__Produ__300424B4");
+                    .HasConstraintName("FK__OrderDeta__Produ__35BCFE0A");
             });
 
             modelBuilder.Entity<Orders>(entity =>
             {
                 entity.HasKey(e => e.OrderId)
-                    .HasName("PK__Orders__C3905BAF637DC601");
+                    .HasName("PK__Orders__C3905BAF2D27B809");
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
@@ -223,12 +221,12 @@ namespace OrderFoodLast.Models
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__Orders__Customer__2B3F6F97");
+                    .HasConstraintName("FK__Orders__Customer__2F10007B");
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__Orders__Employee__2C3393D0");
+                    .HasConstraintName("FK__Orders__Employee__300424B4");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -264,7 +262,7 @@ namespace OrderFoodLast.Models
             modelBuilder.Entity<ProductCategory>(entity =>
             {
                 entity.HasKey(e => e.CategoryId)
-                    .HasName("PK__ProductC__19093A2B7A65344A");
+                    .HasName("PK__ProductC__19093A2B1CF15040");
 
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
@@ -281,17 +279,17 @@ namespace OrderFoodLast.Models
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.ProductCategoryCreatedByNavigation)
                     .HasForeignKey(d => d.CreatedBy)
-                    .HasConstraintName("FK__ProductCa__Creat__21B6055D");
+                    .HasConstraintName("FK__ProductCa__Creat__1FCDBCEB");
 
                 entity.HasOne(d => d.ModifiedByNavigation)
                     .WithMany(p => p.ProductCategoryModifiedByNavigation)
                     .HasForeignKey(d => d.ModifiedBy)
-                    .HasConstraintName("FK__ProductCa__Modif__22AA2996");
+                    .HasConstraintName("FK__ProductCa__Modif__20C1E124");
 
                 entity.HasOne(d => d.Parent)
                     .WithMany(p => p.InverseParent)
                     .HasForeignKey(d => d.ParentId)
-                    .HasConstraintName("FK__ProductCa__Paren__20C1E124");
+                    .HasConstraintName("FK__ProductCa__Paren__1ED998B2");
             });
 
             modelBuilder.Entity<ProductImages>(entity =>
@@ -307,13 +305,13 @@ namespace OrderFoodLast.Models
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.ProductImages)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__ProductIm__Produ__286302EC");
+                    .HasConstraintName("FK__ProductIm__Produ__2A4B4B5E");
             });
 
             modelBuilder.Entity<Roles>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__Roles__8AFACE3AAD84007A");
+                    .HasName("PK__Roles__8AFACE3A7F60ED59");
 
                 entity.Property(e => e.RoleId)
                     .HasColumnName("RoleID")
@@ -325,7 +323,7 @@ namespace OrderFoodLast.Models
             modelBuilder.Entity<Slider>(entity =>
             {
                 entity.HasKey(e => e.SlideId)
-                    .HasName("PK__Slider__9E7CB670B5B67BCF");
+                    .HasName("PK__Slider__9E7CB670117F9D94");
 
                 entity.Property(e => e.SlideId).HasColumnName("SlideID");
 

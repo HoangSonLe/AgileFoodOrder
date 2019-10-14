@@ -1,6 +1,7 @@
-﻿
+﻿@model IEnumerable<OrderFoodLast.Areas.Admin.Models.OrderView>
 @{
     Layout = null;
+    ViewData.Add("orderList", Model);
 }
 
 <!DOCTYPE html>
@@ -17,7 +18,7 @@
              @*@await Html.PartialAsync("Confirm")*@
             <!-- end detail -->
 
-            @await Html.PartialAsync("ListOrder")
+            @await Html.PartialAsync("ListOrder", viewData:this.ViewData)
         </div>
         
     </div>

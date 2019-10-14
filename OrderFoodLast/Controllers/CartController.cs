@@ -7,16 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 using OrderFoodLast.Helper;
 using OrderFoodLast.Models;
 
-namespace BookStore.Controllers
+namespace OrderFoodLast.Controllers
 {
     public class CartController : Controller
     {
-        private readonly OrderFoodContext ctx;
-        private readonly IMapper mapper;
-        
-        public CartController(OrderFoodContext db, IMapper _mapper)
+        private readonly OrderFoodContext _ctx;
+        private readonly IMapper _mapper;
+
+        public CartController(OrderFoodContext db, IMapper mapper)
         {
-            ctx = db; mapper = _mapper;
+            _ctx = db; _mapper = mapper;
         }
 
         public List<CartItem> Cart
@@ -52,13 +52,13 @@ namespace BookStore.Controllers
             }
             else
             {
-                Product hh = ctx.Product.SingleOrDefault(p => p.ProductId == productId);
+                Product hh = _ctx.Product.SingleOrDefault(p => p.ProductId == productId);
 
                 if (hh == null)//hàng hóa ko có trong Database
                     return RedirectToAction("Error", "Home");
                 item = new CartItem
                 {
-                    Product = mapper.Map<ProductView>(hh),
+                    Product = _mapper.Map<ProductView>(hh),
                     Quantity = qty
                 };
 

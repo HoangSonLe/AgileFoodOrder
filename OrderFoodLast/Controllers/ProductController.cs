@@ -10,18 +10,18 @@ namespace OrderFoodLast.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
 
-        private readonly OrderFoodContext ctx;
+        private readonly OrderFoodContext _ctx;
 
-        public ProductController(OrderFoodContext _ctx, IMapper _mapper)
+        public ProductController(OrderFoodContext ctx, IMapper mapper)
         {
-            ctx = _ctx;
-            mapper = _mapper;
+            _ctx = ctx;
+            _mapper = mapper;
         }
         public IActionResult Index(int? id)
         {
-            var productList = ctx.Product.AsQueryable();
+            var productList = _ctx.Product.AsQueryable();
             if (id.HasValue)
             {
                 productList = productList.Where(p => p.ProductId == id);
@@ -32,7 +32,7 @@ namespace OrderFoodLast.Controllers
 
             if (id.HasValue)
             {
-                ProductCategory productCategory = ctx.ProductCategory.SingleOrDefault(p => p.CategoryId == id.Value);
+                ProductCategory productCategory = _ctx.ProductCategory.SingleOrDefault(p => p.CategoryId == id.Value);
                 ViewBag.category = productCategory;
             }
 

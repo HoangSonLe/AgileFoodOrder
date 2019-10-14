@@ -9,7 +9,7 @@ namespace OrderFoodLast.Models
     {
         public ProductView Product { get; set; }
         public int Quantity { get; set; }
-        public double Total => Quantity * Product.Price ;
+        public double Total => Quantity * Product.Price;
 
     }
 }

@@ -59,7 +59,6 @@ D:\AgileFoodOrder\OrderFoodLast\bin\Debug\netcoreapp2.2\OrderFoodLast.dll
 D:\AgileFoodOrder\OrderFoodLast\bin\Debug\netcoreapp2.2\OrderFoodLast.pdb
 D:\AgileFoodOrder\OrderFoodLast\bin\Debug\netcoreapp2.2\OrderFoodLast.Views.dll
 D:\AgileFoodOrder\OrderFoodLast\bin\Debug\netcoreapp2.2\OrderFoodLast.Views.pdb
-D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.csprojAssemblyReference.cache
 D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.csproj.CoreCompileInputs.cache
 D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.RazorAssemblyInfo.cache
 D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.RazorAssemblyInfo.cs
@@ -116,3 +115,4 @@ D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.Views.pdb
 D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.dll
 D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.pdb
 D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.csproj.CopyComplete
+D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.csprojAssemblyReference.cache
