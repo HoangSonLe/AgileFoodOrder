@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\AgileFoodOrder\\OrderFoodLast\\OrderFoodLast.csproj": {}
+    "D:\\AgileFoodOrder\\OrderFoodLast\\OrderFoodLast.csproj": {}
   },
   "projects": {
-    "E:\\AgileFoodOrder\\OrderFoodLast\\OrderFoodLast.csproj": {
+    "D:\\AgileFoodOrder\\OrderFoodLast\\OrderFoodLast.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\AgileFoodOrder\\OrderFoodLast\\OrderFoodLast.csproj",
+        "projectUniqueName": "D:\\AgileFoodOrder\\OrderFoodLast\\OrderFoodLast.csproj",
         "projectName": "OrderFoodLast",
-        "projectPath": "E:\\AgileFoodOrder\\OrderFoodLast\\OrderFoodLast.csproj",
-        "packagesPath": "C:\\Users\\thanh\\.nuget\\packages\\",
-        "outputPath": "E:\\AgileFoodOrder\\OrderFoodLast\\obj\\",
+        "projectPath": "D:\\AgileFoodOrder\\OrderFoodLast\\OrderFoodLast.csproj",
+        "packagesPath": "C:\\Users\\Kay\\.nuget\\packages\\",
+        "outputPath": "D:\\AgileFoodOrder\\OrderFoodLast\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\thanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Kay\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

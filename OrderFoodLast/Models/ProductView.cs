@@ -12,14 +12,14 @@ namespace OrderFoodLast.Models
         [Display(Name = "Mã hàng hóa")]
         public int ProductId { get; set; }
         [Display(Name = "Tên hàng hóa")]
-        public string ProductName { get; set; }
-        [MaxLength(150)]
-        [Display(Name = "Hình")]
-        public string ProductImage { get; set; }
-        [Display(Name = "Đơn giá")]
-        public double Price { get; set; }
+        //public string ProductName { get; set; }
+        //[MaxLength(150)]
+        //[Display(Name = "Hình")]
+        //public string ProductImage { get; set; }
+        //[Display(Name = "Đơn giá")]
+        public int Price { get; set; }
         [Display(Name = "Số lượng")]
         public int Quantity { get; set; }
-        public string ProductNameSeoUrl => ProductName.ToUrlFriendly();
+        //public string SeoTitle { get; set; }
     }
 }

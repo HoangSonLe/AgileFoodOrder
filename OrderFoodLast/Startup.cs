@@ -36,7 +36,7 @@ namespace OrderFoodLast
 #pragma warning disable CS0618 // Type or member is obsolete
             services.AddAutoMapper();
 #pragma warning restore CS0618 // Type or member is obsolete
-            services.AddDbContext<OrderFoodContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("MyShopK6")));
+            services.AddDbContext<OrderFoodContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("MyDb")));
 
             services.AddSession(opt => {
                 opt.IdleTimeout = TimeSpan.FromMinutes(5);
