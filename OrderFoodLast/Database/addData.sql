@@ -215,9 +215,34 @@ insert into Product(ProductName, SeoTitle, Description, ProductImage, Price, Pro
 1,500,12,'2019-10-14',2,'2019-10-14',1,1,20)
 
 
+--insert customer 
+select * from Customer
+insert into Customer(UserName, Password, FirstName, LastName, Address, Email, Phone,
+					CreatedDate, CreatedBy, ModifiedDate, ModifiedBy, Status) values
+('phuongnh','phuongnh',N'Hoàng',N'Phương','280 An Dương Vương','phuongnh@gmail.com','0123456',
+'2019-10-14',null,'2019-10-14',null,1)
+
+insert into Customer(UserName, Password, FirstName, LastName, Address, Email, Phone,
+					CreatedDate, CreatedBy, ModifiedDate, ModifiedBy, Status) values
+('thanhhv','thanhhv',N'Văn',N'Thành','280 An Dương Vương','thanhhv@gmail.com','0123456',
+'2019-10-14',null,'2019-10-14',null,1)
 
 
 
+go
+--insert Orders
+select * from Orders
+insert into Orders(CustomerID, EmployeeID, Comment, OrderStatus,
+				CreatedDate, CreatedBy, ModifiedDate, ModifiedBy, ShipDate)values
+(1,null,N'Giao trước 3h',1,'2019-10-14',null,'2019-10-14',null,null)
+
+insert into Orders(CustomerID, EmployeeID, Comment, OrderStatus,
+				CreatedDate, CreatedBy, ModifiedDate, ModifiedBy, ShipDate)values
+(2,null,N'Giao trước 7h',1,'2019-10-14',null,'2019-10-14',null,null)
+
+--insert order detail
+insert into OrderDetail(OrderID,ProductID,Quantity) values
+(1,1,3),(1,2,1),(2,2,1),(2,3,1)
 
 
 
