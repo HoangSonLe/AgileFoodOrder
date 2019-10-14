@@ -27,7 +27,7 @@ namespace OrderFoodLast.Areas.Admin.Controllers
         {
 
             var orderList = _ctx.Orders.Join(_ctx.Customer,
-                ord => ord.OrderId,
+                ord => ord.CustomerId,
                 cus => cus.CustomerId,
 
                 (ord, cus) => new OrderView
@@ -42,28 +42,29 @@ namespace OrderFoodLast.Areas.Admin.Controllers
         }
 
         [Area("Admin")]
-        [Route("Admin/Order/{id?}")]
+        [Route("Admin/Order/{id}")]
         public IActionResult Edit(int id)
         {
-            var orderList = _ctx.Orders.Where(p => p.OrderId == id).Join(_ctx.Customer,
-               ord => ord.OrderId,
-               cus => cus.CustomerId,
+            
+                var orderList = _ctx.Orders.Where(p => p.OrderId == id).Join(_ctx.Customer,
+                   ord => ord.CustomerId,
+                   cus => cus.CustomerId,
 
-               (ord, cus) => new AllInfoOrderDetail
-               {
-                   cusName = cus.FirstName + cus.LastName,
-                   cusAddress = cus.Address,
-                   cusPhone = cus.Phone,
-                   comment = ord.Comment,
-                   // à lỗi t quên thêm vô :D
-                   status=ord.OrderStatus
-               }
-           ).SingleOrDefault();
+                   (ord, cus) => new AllInfoOrderDetail
+                   {
+                       cusName = cus.FirstName + cus.LastName,
+                       cusAddress = cus.Address,
+                       cusPhone = cus.Phone,
+                       comment = ord.Comment,
+                   status = ord.OrderStatus
+                   }
+               ).SingleOrDefault();
 
-            var list = _ctx.OrderDetail.Where(p=>p.OrderId==id).Include(x => x.Product).ToList();
-            orderList.details = list;
-            ViewData.Model = orderList;
-            return View("Detail");
+                var list = _ctx.OrderDetail.Where(p => p.OrderId == id).Include(x => x.Product).ToList();
+                orderList.details = list;
+                ViewData.Model = orderList;
+                return View("Detail");
+
         }
 
     }
