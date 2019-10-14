@@ -1,4 +1,9 @@
-﻿<nav>
+﻿@using OrderFoodLast.Areas.Admin.Models
+@using OrderFoodLast.Models
+@{ 
+    AllInfoOrderDetail o = Model;
+}
+<nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Thông tin</a>
         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Xác nhận</a>
@@ -7,21 +12,43 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
     <!-- thong tin -->
+    @{
+        int num = 1;
+    }
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <h1 class="m-3">Thông tin hóa đơn</h1>
-        <h3 class="text-danger">Lý Cẩm Minh - 120 Tà rụt tà nông cu lông cu Hà nội</h3>
-        <div class="card" style="width: 18rem;">
-            <img src="https://via.placeholder.com/150x150" class="card-img-top" alt="food">
-            <div class="card-body">
-                <h5 class="card-title">DH: 12362</h5>
-                <p class="card-text">Bánh mì sài gòn nhưng nhân hà nội.</p>
+
+        @foreach (OrderDetail p in o.details)
+        {
+            @if (num % 4 == 1)
+            {
+                @:<div class="row" style="margin:10px">
+            }
+            <div class="col-3 col">
+                <div class="card" style="width: 18rem;">
+                    <img src="~/img/@p.Product.ProductImage" style="width:160px;height:160px" class="card-img-top" alt="food">
+                    <div class="card-body">
+                        <h5 class="card-title">DH: @p.OrderId</h5>
+                        <p class="card-text">@p.Product.ProductName.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Giá: @p.Product.PromotionPrice vnd</li>
+                    </ul>
+                    @{
+                        ++num;
+                        if (num % 4 == 1)
+                        {
+                             @:</div>
+                        }
+                    }
+                </div>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Giá: 20000 vnd</li>
-            </ul>
             
-        </div>
+
+        }
+
     </div>
+  </div>
     <!-- end thong tin -->
     <!-- xac nhan -->
     <div class="tab-pane fade ml-3 mb-3 mr-3" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -75,8 +102,38 @@
                                     <label class="col-sm-4 col-form-label">Trạng thái</label>
                                     <div class="col-sm-8">
                                         <select class="form-control">
-                                            <option>Khách hủy</option>
-                                            <option>Đã xác nhận</option>
+
+
+                                            @if (o.status == 1)
+                                            {
+                                                <option selected>Pending</option>
+                                                <option>Processing</option>
+                                                <option>Rejected</option>
+                                                <option>Completed</option>
+                                            }
+
+                                            @if (o.status == 2)
+                                            {
+                                                <option>Pending</option>
+                                                <option selected>Processing</option>
+                                                <option>Rejected</option>
+                                                <option>Completed</option>
+                                            }
+                                            @if (o.status == 3)
+                                            {
+                                                <option>Pending</option>
+                                                <option>Processing</option>
+                                                <option selected>Rejected</option>
+                                                <option>Completed</option>
+                                            }
+                                            @if (o.status == 4)
+                                            {
+                                                <option>Pending</option>
+                                                <option>Processing</option>
+                                                <option>Rejected</option>
+                                                <option selected>Completed</option>
+                                            }
+
                                         </select>
                                     </div>
                                 </div>
@@ -88,25 +145,25 @@
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">Họ và tên</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" value="@o.cusName">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">Điện thoại</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" value="@o.cusPhone">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">Địa chỉ</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" value="@o.cusAddress">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">Ghi chú của Khách</label>
                                     <div class="col-sm-8">
-                                        <textarea class="form-control" cols="5" rows="3"></textarea>
+                                        <textarea class="form-control" cols="5" rows="3">@o.comment</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -121,34 +178,30 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">SP</th>
-                                    <th scope="col">KG(gr)</th>
                                     <th scope="col">SL</th>
                                     <th scope="col">Giá</th>
                                     <th scope="col">T.tiền</th>
-                                    <th scope="col">C.chấu</th>
                                     <th scope="col">-</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach (OrderDetail p in o.details)
+                                {
+                                    int? total = p.Product.PromotionPrice * p.Quantity;
                                 <tr>
-                                    <th>bánh plant đậu</th>
+                                    <th>@p.Product.ProductName</th>
                                     <td>
-                                        <input type="text" class="form-control" value="1">
+                                        <input type="text" class="form-control" value="@p.Quantity">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" value="10">
+                                        <input type="text" class="form-control" value="@p.Product.PromotionPrice">
                                     </td>
-                                    <td>
-                                        <input type="text" class="form-control" value="500.000">
-                                    </td>
-                                    <td>500000</td>
-                                    <td>
-                                        <input type="text" class="form-control" value="0%">
-                                    </td>
+                                    <td>@total</td>
                                     <td>
                                         <a href=""><i class="fas fa-times-circle"></i></a>
                                     </td>
                                 </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
