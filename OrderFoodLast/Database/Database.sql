@@ -4,6 +4,49 @@ CREATE DATABASE OrderFood
 GO
 USE OrderFood
 GO
+CREATE TABLE Roles(
+	RoleID INT NOT NULL PRIMARY KEY,
+	RoleName nvarchar(250)
+)
+GO
+CREATE TABLE Customer (
+	--BirthDate if people is employee
+	--ManagerID if people is employee
+	-- => Should has 2 tables ?
+	CustomerID INT IDENTITY NOT NULL PRIMARY KEY,
+	UserName varchar(250),
+	Password varchar(250),
+	FirstName nvarchar(50),
+	LastName nvarchar(50),
+	Address nvarchar(250),
+	Email nvarchar(250),
+	Phone nvarchar(250),
+	CreatedDate datetime,
+	CreatedBy int,
+	ModifiedDate datetime,
+	ModifiedBy int ,
+	Status int
+)
+GO
+CREATE TABLE Employee (
+	EmployeeID INT IDENTITY NOT NULL PRIMARY KEY,
+	UserName varchar(250),
+	Password varchar(250),
+	FirstName nvarchar(50),
+	LastName nvarchar(50),
+	Address nvarchar(250),
+	Email nvarchar(250),
+	Phone nvarchar(250),
+	BirthDate datetime,
+	Role int FOREIGN KEY REFERENCES Roles(RoleID),
+	ManagerID int FOREIGN KEY REFERENCES Employee(EmployeeID),
+	CreatedDate datetime,
+	CreatedBy int,
+	ModifiedDate datetime,
+	ModifiedBy int ,
+	Status int
+)
+GO
 CREATE TABLE Menu (
 	MenuID INT IDENTITY NOT NULL PRIMARY KEY,
 	MenuName nvarchar(250),
@@ -53,13 +96,15 @@ CREATE TABLE ProductCategory(
 	ModifiedDate datetime,
 	ModifiedBy int ,
 	Status int,
-	FOREIGN KEY (ParentID) REFERENCES ProductCategory(CategoryID)
+	FOREIGN KEY (ParentID) REFERENCES ProductCategory(CategoryID),
+	FOREIGN KEY (CreatedBy) REFERENCES Employee(EmployeeID),
+	FOREIGN KEY (ModifiedBy) REFERENCES Employee(EmployeeID),
 )
 GO
 CREATE TABLE Product (
 	ProductID int IDENTITY NOT NULL PRIMARY KEY,
 	ProductName nvarchar(50),
-	MetaTitle varchar(250),
+	SeoTitle varchar(250),
 	Description nvarchar(500),
 	ProductImage varchar(250),
 	Price int,
@@ -77,55 +122,15 @@ CREATE TABLE Product (
 )
 GO
 CREATE TABLE ProductImages(
+	ProductImagesID int IDENTITY NOT NULL PRIMARY KEY,
 	ProductID int,
 	ProductImage varchar(250),
 	FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 )
 	
 GO
-CREATE TABLE Roles(
-	RoleID INT NOT NULL PRIMARY KEY,
-	RoleName nvarchar(250)
-)
-GO
-CREATE TABLE Customer (
-	--BirthDate if people is employee
-	--ManagerID if people is employee
-	-- => Should has 2 tables ?
-	CustomerID INT IDENTITY NOT NULL PRIMARY KEY,
-	UserName varchar(250),
-	Password varchar(250),
-	FirstName nvarchar(50),
-	LastName nvarchar(50),
-	Address nvarchar(250),
-	Email nvarchar(250),
-	Phone nvarchar(250),
-	CreatedDate datetime,
-	CreatedBy int,
-	ModifiedDate datetime,
-	ModifiedBy int ,
-	Status int
-)
-GO
-CREATE TABLE Employee (
-	EmployeeID INT IDENTITY NOT NULL PRIMARY KEY,
-	UserName varchar(250),
-	Password varchar(250),
-	FirstName nvarchar(50),
-	LastName nvarchar(50),
-	Address nvarchar(250),
-	Email nvarchar(250),
-	Phone nvarchar(250),
-	BirthDate datetime,
-	Role int FOREIGN KEY REFERENCES Roles(RoleID),
-	ManagerID int FOREIGN KEY REFERENCES Employee(EmployeeID),
-	CreatedDate datetime,
-	CreatedBy int,
-	ModifiedDate datetime,
-	ModifiedBy int ,
-	Status int
-)
-GO
+
+
 
 GO
 CREATE TABLE Orders (
@@ -142,6 +147,7 @@ CREATE TABLE Orders (
 )
 GO
 CREATE TABLE OrderDetail (
+	OrderDetailID INT IDENTITY NOT NULL PRIMARY KEY,
 	OrderID int FOREIGN KEY REFERENCES Orders(OrderID),
 	ProductID int FOREIGN KEY REFERENCES Product(ProductID),
 	Quantity int,
