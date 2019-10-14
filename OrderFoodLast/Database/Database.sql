@@ -59,7 +59,7 @@ GO
 CREATE TABLE Product (
 	ProductID int IDENTITY NOT NULL PRIMARY KEY,
 	ProductName nvarchar(50),
-	MetaTitle varchar(250),
+	SeoTitle varchar(250),
 	Description nvarchar(500),
 	ProductImage varchar(250),
 	Price int,
