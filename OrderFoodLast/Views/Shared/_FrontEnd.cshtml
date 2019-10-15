@@ -32,6 +32,9 @@
     <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
+    <!-- header-area-start -->
+    @await Html.PartialAsync("_MyHeader")
+    <!-- header-area-end -->
     @RenderBody()
     <!-- footer-area-start -->
     @await Html.PartialAsync("_MyFooter")

@@ -33,7 +33,7 @@ namespace OrderFoodLast.Areas.Admin.Controllers
                 (ord, cus) => new OrderView
                 {
                     Id = ord.OrderId,
-                    FullName = cus.FirstName + cus.LastName,
+                    FullName = cus.FirstName + " " + cus.LastName,
                     Total = ord.Total,
                     ShipDate = ord.ShipDate
                 }

@@ -1,8 +1,9 @@
-﻿<!-- header-area-start -->
-@await Html.PartialAsync("_MyHeader")
-<!-- header-area-end -->
+﻿@{
+
+    ViewData.Add("data", "Cart");
+}
 <!-- breadcrumbs-area-start -->
-@await Html.PartialAsync("_Breadcrumbs")
+@await Html.PartialAsync("_Breadcrumbs", viewData: this.ViewData)
 <!-- breadcrumbs-area-end -->
 <!-- entry-header-area-start -->
 <div class="entry-header-area">
@@ -18,5 +19,6 @@
 </div>
 <!-- entry-header-area-end -->
 <!-- cart-main-area-start -->
+@await Html.PartialAsync("ProductCart")
 @await Html.PartialAsync("CartDetail")
 <!-- cart-main-area-end -->

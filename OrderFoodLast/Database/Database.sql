@@ -143,7 +143,8 @@ CREATE TABLE Orders (
 	CreatedBy int,
 	ModifiedDate datetime,
 	ModifiedBy int ,
-	ShipDate datetime
+	ShipDate datetime,
+	Total int,
 )
 GO
 CREATE TABLE OrderDetail (

@@ -2,21 +2,19 @@
 
 @{
 
-    ViewData.Add("data", "Cart");
+    ViewData.Add("data", "Product");
+  
 }
-<!-- header-area-start -->
-@await Html.PartialAsync("_MyHeader")
-<!-- header-area-end -->
+
 @await Html.PartialAsync("_Breadcrumbs", viewData: this.ViewData)
 <!-- shop-main-area-start -->
 <div class="shop-main-area mb-70">
     <div class="container">
         <div class="row">
-            @await Html.PartialAsync("ShopLeft")
+            <!--ShopLeft-->
+            @await Component.InvokeAsync("ShopLeft")
             <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                <div class="category-image mb-30">
-                    <a href="#"><img src="img/banner/32.jpg" alt="banner" /></a>
-                </div>
+               
                 <div class="section-title-5 mb-30">
                     <h2>Book</h2>
                 </div>
@@ -65,7 +63,7 @@
                                     <!-- single-product-start -->
                                     <div class="product-wrapper mb-40">
                                         <div class="product-img">
-                                            <a title="@p.ProductName" href="/product/@p.SeoTitle">
+                                            <a title="@p.ProductName" href="/product/GetAll/@p.SeoTitle">
                                                 <img src="img/@p.ProductImage" alt="book" class="primary" style="width: 160px; height:160px" />
                                             </a>
                                             <div class="quick-view">
@@ -94,7 +92,7 @@
                                         </div>
                                         <div class="product-link">
                                             <div class="product-button">
-                                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
                                             </div>
                                             <div class="add-to-link">
                                                 <ul>

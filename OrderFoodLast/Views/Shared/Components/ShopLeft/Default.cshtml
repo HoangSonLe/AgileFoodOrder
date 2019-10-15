@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ProductCategory>
+
+<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+    <div class="shop-left">
+        <div class="section-title-5 mb-30">
+            <h2>Shopping Options</h2>
+        </div>
+        @foreach (var p in Model)
+        {
+            @if (!p.ParentId.HasValue)
+            {
+                <div class="left-title mb-20">
+                    <h4>@p.Name</h4>
+                </div>
+                <div class="left-menu mb-30">
+                    <ul>
+                        @foreach (var k in Model)
+                        {
+                            @if (k.ParentId.HasValue && k.ParentId == p.CategoryId)
+                            {
+                                <li><a asp-controller="Product" asp-action="Index" asp-route-seotitle="@k.MetaTitle">@k.Name</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            }
+        }
+
+    </div>
+</div>
