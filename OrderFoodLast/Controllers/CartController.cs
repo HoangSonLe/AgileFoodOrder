@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrderFoodLast.Helper;
 using OrderFoodLast.Models;
@@ -26,82 +27,87 @@ namespace OrderFoodLast.Controllers
                 var data = HttpContext.Session.GetObject<List<CartItem>>("GioHang");
                 if (data == null)
                 {
+
                     data = new List<CartItem>();
                 }
-
                 return data;
             }
         }
-
         public IActionResult Index()
         {
             return View(Cart);
         }
-
-        [HttpPost]
-        public IActionResult AddToCart(int productId, int qty, string loai)
+        [Route("cart/GetCartDetail/{CustomerId}")]
+        public IActionResult GetCartDetail(int? CustomerId)
         {
-            //Lấy giỏ hàng đang có ở Session
-            List<CartItem> carts = Cart;
-
-            //tìm xem đã có hàng hóa trong giỏ hàng với mã chọn hay chưa
-            CartItem item = carts.SingleOrDefault(p => p.Product.ProductId == productId);
-            if (item != null)//đã có
-            {
-                item.Quantity += qty;
-            }
-            else
-            {
-                Product hh = _ctx.Product.SingleOrDefault(p => p.ProductId == productId);
-
-                if (hh == null)//hàng hóa ko có trong Database
-                    return RedirectToAction("Error", "Home");
-                item = new CartItem
-                {
-                    Product = _mapper.Map<ProductView>(hh),
-                    Quantity = qty
-                };
-
-                carts.Add(item);
-            }
-
-            //update lại giỏ hàng
-            HttpContext.Session.SetObject("GioHang", carts);
-
-            if (loai == "AJAX")
-            {
-                return Json(new
-                {
-                    SoLuong = Cart.Sum(p => p.Quantity),
-                    TongTien = Cart.Sum(p => p.Total)
-                });
-            }
-
-            return RedirectToAction("Index");
+            var cart = _ctx.Orders.Where(p => p.CustomerId == CustomerId).ToList();
+            return View("CartDetail",cart);
         }
 
-        public IActionResult RemoveCart(int id, string loai)
-        {
-            List<CartItem> carts = Cart;
+        //[HttpPost]
+        //public IActionResult AddToCart(int productId, int qty, string loai)
+        //{
+        //    //Lấy giỏ hàng đang có ở Session
+        //    List<CartItem> carts = Cart;
 
-            CartItem item = carts.SingleOrDefault(p => p.Product.ProductId == id);
-            if (item != null)
-            {
-                carts.Remove(item);
+        //    //tìm xem đã có hàng hóa trong giỏ hàng với mã chọn hay chưa
+        //    CartItem item = carts.SingleOrDefault(p => p.Product.ProductId == productId);
+        //    if (item != null)//đã có
+        //    {
+        //        item.Quantity += qty;
+        //    }
+        //    else
+        //    {
+        //        Product hh = _ctx.Product.SingleOrDefault(p => p.ProductId == productId);
 
-                HttpContext.Session.SetObject("GioHang", carts);
-            }
+        //        if (hh == null)//hàng hóa ko có trong Database
+        //            return RedirectToAction("Error", "Home");
+        //        item = new CartItem
+        //        {
+        //            Product = _mapper.Map<ProductView>(hh),
+        //            Quantity = qty
+        //        };
 
-            if (loai == "AJAX")
-            {
-                return Json(new
-                {
-                    SoLuong = Cart.Sum(p => p.Quantity),
-                    TongTien = Cart.Sum(p => p.Total)
-                });
-            }
+        //        carts.Add(item);
+        //    }
 
-            return RedirectToAction("Index");
-        }
+        //    //update lại giỏ hàng
+        //    HttpContext.Session.SetObject("GioHang", carts);
+
+        //    if (loai == "AJAX")
+        //    {
+        //        return Json(new
+        //        {
+        //            SoLuong = Cart.Sum(p => p.Quantity),
+        //            TongTien = Cart.Sum(p => p.Total)
+        //        });
+        //    }
+
+        //    return RedirectToAction("Index");
+        //}
+
+        //public IActionResult RemoveCart(int id, string loai)
+        //{
+        //    List<CartItem> carts = Cart;
+
+        //    CartItem item = carts.SingleOrDefault(p => p.Product.ProductId == id);
+        //    if (item != null)
+        //    {
+        //        carts.Remove(item);
+
+        //        HttpContext.Session.SetObject("GioHang", carts);
+        //    }
+
+        //    if (loai == "AJAX")
+        //    {
+        //        return Json(new
+        //        {
+        //            SoLuong = Cart.Sum(p => p.Quantity),
+        //            TongTien = Cart.Sum(p => p.Total)
+        //        });
+        //    }
+
+        //    return RedirectToAction("Index");
+        //}
     }
 }

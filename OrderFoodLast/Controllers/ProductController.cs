@@ -20,7 +20,6 @@ namespace OrderFoodLast.Controllers
             _ctx = ctx;
             _mapper = mapper;
         }
-        
         public ActionResult Index(string seoTitle)
         {
             var categoryList = _ctx.ProductCategory.AsQueryable();
@@ -30,7 +29,6 @@ namespace OrderFoodLast.Controllers
                                     .Select(p => new ProductCategory
                                                     {
                                                         CategoryId = p.CategoryId
-
                                     }).ToList();
             products = category.Join(_ctx.Product,
                     c => c.CategoryId,
