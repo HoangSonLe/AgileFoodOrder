@@ -52,7 +52,7 @@ namespace OrderFoodLast.Areas.Admin.Controllers
 
                    (ord, cus) => new AllInfoOrderDetail
                    {
-                       cusName = cus.FirstName + cus.LastName,
+                       cusName = cus.FirstName +" "+ cus.LastName,
                        cusAddress = cus.Address,
                        cusPhone = cus.Phone,
                        comment = ord.Comment,
