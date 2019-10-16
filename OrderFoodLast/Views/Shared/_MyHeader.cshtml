@@ -1,4 +1,7 @@
-﻿<header>
+﻿@using Microsoft.AspNetCore.Http;
+@using OrderFoodLast.Models
+@using OrderFoodLast.Helper
+<header>
     <!-- header-top-area-start -->
     <div class="header-top-area">
         <div class="container">
@@ -30,9 +33,24 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="account-area text-right">
                         <ul>
-                            <li><a href="register.html">My Account</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="login.html">Sign in</a></li>
+                            @{
+                                LoginInfo info = Context.Session.GetObject<LoginInfo>("Info");
+                                if (info == null)
+                                {
+                                    <li><a href="register.html">My Account</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="/Signin">Sign in</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="register.html">@info.Name</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="/Signin/Logout">Logout</a></li>
+                                }
+                            }
+                            @*<li><a href="register.html">My Account</a></li>
+                                <li><a href="checkout.html">Checkout</a></li>
+                                <li><a href="login.html">Sign in</a></li>*@
                         </ul>
                     </div>
                 </div>
