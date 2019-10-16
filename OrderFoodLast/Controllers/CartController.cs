@@ -51,12 +51,14 @@ namespace OrderFoodLast.Controllers
             CartItem item = carts.SingleOrDefault(c => c.Product.ProductId == id);
             if (item == null)
             {
-                carts.Add(new CartItem { Product = _ctx.Product.Find(id), Quantity = 1 });
+                Product p = _ctx.Product.Find(id);
+                carts.Add(new CartItem { Product = p, Quantity = 1, Total = p.Price});
                 HttpContext.Session.SetObject("Cart", carts);
             }
             else
             {
                 item.Quantity += 1;
+                item.Total += item.Product.Price;
                 HttpContext.Session.SetObject("Cart", carts);
             }
             return RedirectToAction("Index");
