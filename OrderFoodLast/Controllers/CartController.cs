@@ -24,7 +24,7 @@ namespace OrderFoodLast.Controllers
         {
             get
             {
-                var data = HttpContext.Session.GetObject<List<CartItem>>("GioHang");
+                var data = HttpContext.Session.GetObject<List<CartItem>>("Cart");
                 if (data == null)
                 {
 
@@ -44,47 +44,23 @@ namespace OrderFoodLast.Controllers
             return View("CartDetail",cart);
         }
 
-        //[HttpPost]
-        //public IActionResult AddToCart(int productId, int qty, string loai)
-        //{
-        //    //Lấy giỏ hàng đang có ở Session
-        //    List<CartItem> carts = Cart;
-
-        //    //tìm xem đã có hàng hóa trong giỏ hàng với mã chọn hay chưa
-        //    CartItem item = carts.SingleOrDefault(p => p.Product.ProductId == productId);
-        //    if (item != null)//đã có
-        //    {
-        //        item.Quantity += qty;
-        //    }
-        //    else
-        //    {
-        //        Product hh = _ctx.Product.SingleOrDefault(p => p.ProductId == productId);
-
-        //        if (hh == null)//hàng hóa ko có trong Database
-        //            return RedirectToAction("Error", "Home");
-        //        item = new CartItem
-        //        {
-        //            Product = _mapper.Map<ProductView>(hh),
-        //            Quantity = qty
-        //        };
-
-        //        carts.Add(item);
-        //    }
-
-        //    //update lại giỏ hàng
-        //    HttpContext.Session.SetObject("GioHang", carts);
-
-        //    if (loai == "AJAX")
-        //    {
-        //        return Json(new
-        //        {
-        //            SoLuong = Cart.Sum(p => p.Quantity),
-        //            TongTien = Cart.Sum(p => p.Total)
-        //        });
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
+        [Route("addToCart/{id:int}")]
+        public IActionResult AddToCart(int id)
+        {
+            List<CartItem> carts = Cart;
+            CartItem item = carts.SingleOrDefault(c => c.Product.ProductId == id);
+            if (item == null)
+            {
+                carts.Add(new CartItem { Product = _ctx.Product.Find(id), Quantity = 1 });
+                HttpContext.Session.SetObject("Cart", carts);
+            }
+            else
+            {
+                item.Quantity += 1;
+                HttpContext.Session.SetObject("Cart", carts);
+            }
+            return RedirectToAction("Index");
+        }
 
         //public IActionResult RemoveCart(int id, string loai)
         //{

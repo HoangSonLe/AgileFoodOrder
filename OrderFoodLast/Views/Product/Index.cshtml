@@ -58,7 +58,7 @@
                     <div class="tab-pane active" id="th">
                         <div class="row">
                             @foreach (var p in Model)
-                            {
+                            { 
                                 <div class="col-lg-3 col-md-4 col-sm-6">
                                     <!-- single-product-start -->
                                     <div class="product-wrapper mb-40">
@@ -92,7 +92,7 @@
                                         </div>
                                         <div class="product-link">
                                             <div class="product-button">
-                                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
+                                                <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@p.ProductId" title="Add to cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
                                             </div>
                                             <div class="add-to-link">
                                                 <ul>

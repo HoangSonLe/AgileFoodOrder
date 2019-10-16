@@ -7,7 +7,7 @@ namespace OrderFoodLast.Models
 {
     public class CartItem
     {
-        public ProductView Product { get; set; }
+        public Product Product { get; set; }
         public int Quantity { get; set; }
         public double Total { get; set; }
         //public double Total => Quantity * Product.Price;
