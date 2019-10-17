@@ -50,7 +50,7 @@
                                     <td class="product-thumbnail"><a href="#"><img src="img/@p.Product.ProductImage" alt="man"/></a></td>
                                     <td class="product-name"><a href="#">@p.Product.ProductName</a></td>
                                     <td class="product-price"><span class="amount">@price</span></td>
-                                    <td class="product-quantity"><input type="number" value="@p.Quantity"></td>
+                                    <td class="product-quantity"><input type="number" id="value-product-quantity" value="@p.Quantity"></td>
                                     
                                     <td class="product-subtotal">@total</td>
                                     <td class="product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
@@ -70,47 +70,21 @@
                         <li><a href="#">Tiếp tục mua sắm</a></li>
                     </ul>
                 </div>
-                <div class="coupon">
-                    <h3>Coupon</h3>
-                    <p>Enter your coupon code if you have one.</p>
-                    <form action="#">
-                        <input type="text" placeholder="Coupon code">
-                        <a href="#">Apply Coupon</a>
-                    </form>
-                </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="cart_totals">
-                    <h2>Cart Totals</h2>
+                    <h2>Tổng số giỏ hàng</h2>
                     <table>
                         <tbody>
-                            <tr class="cart-subtotal">
-                                <th>Subtotal</th>
-                                <td>
-                                    <span class="amount">£215.00</span>
-                                </td>
-                            </tr>
-                            <tr class="shipping">
-                                <th>Shipping</th>
-                                <td>
-                                    <ul id="shipping_method">
-                                        <li>
-                                            <input type="radio">
-                                            <label>
-                                                Flat Rate:
-                                                <span class="amount">£7.00</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <input type="radio">
-                                            <label> Free Shipping </label>
-                                        </li>
-                                    </ul>
-                                    <a href="#">Calculate Shipping</a>
-                                </td>
-                            </tr>
                             <tr class="order-total">
-                                <th>Total</th>
+                                <th>Số Lượng</th>
+                                <td>
+                                    <span class="amount">12</span>
+                                </td>
+                            </tr>
+                            
+                            <tr class="order-total">
+                                <th>Tổng Tiền</th>
                                 <td>
                                     <strong>
                                         <span class="amount">£215.00</span>
@@ -120,7 +94,7 @@
                         </tbody>
                     </table>
                     <div class="wc-proceed-to-checkout">
-                        <a href="#">Proceed to Checkout</a>
+                        <a href="#">Thanh Toán đơn hàng</a>
                     </div>
                 </div>
             </div>
@@ -132,3 +106,14 @@
 
 @await Html.PartialAsync("CartDetail")
 <!-- cart-main-area-end -->
+
+@section Scripts{ 
+    <script>
+        $("#value-product-quantity").change(function(e) {
+            var val = $("#value-product-quantity").val();
+            val = val > 0 ? val : 0;
+            $("#value-product-quantity").val(val);
+            console.log(val);
+        });
+    </script>
+}

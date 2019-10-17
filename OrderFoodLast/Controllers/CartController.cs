@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrderFoodLast.Helper;
 using OrderFoodLast.Models;
 
@@ -49,6 +50,9 @@ namespace OrderFoodLast.Controllers
         {
             List<CartItem> carts = Cart;
             CartItem item = carts.SingleOrDefault(c => c.Product.ProductId == id);
+
+            
+
             if (item == null)
             {
                 Product p = _ctx.Product.Find(id);

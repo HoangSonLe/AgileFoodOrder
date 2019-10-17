@@ -39,7 +39,7 @@ namespace OrderFoodLast
             services.AddDbContext<OrderFoodContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("MyDb")));
 
             services.AddSession(opt => {
-                opt.IdleTimeout = TimeSpan.FromMinutes(5);
+                opt.IdleTimeout = TimeSpan.FromMinutes(15);
                 opt.Cookie.IsEssential = true;
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
