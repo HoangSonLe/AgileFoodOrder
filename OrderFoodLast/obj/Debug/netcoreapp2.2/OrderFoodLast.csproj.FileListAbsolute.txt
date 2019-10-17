@@ -116,3 +116,5 @@ D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.dll
 D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.pdb
 D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.csproj.CopyComplete
 D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\OrderFoodLast.csprojAssemblyReference.cache
+D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\ShopLeft\Default.g.cshtml.cs
+D:\AgileFoodOrder\OrderFoodLast\obj\Debug\netcoreapp2.2\Razor\Views\Order\Index.g.cshtml.cs

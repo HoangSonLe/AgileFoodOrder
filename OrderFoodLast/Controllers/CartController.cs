@@ -11,6 +11,7 @@ using OrderFoodLast.Models;
 
 namespace OrderFoodLast.Controllers
 {
+    [Route("Cart")]
     public class CartController : Controller
     {
         private readonly OrderFoodContext _ctx;
@@ -34,11 +35,14 @@ namespace OrderFoodLast.Controllers
                 return data;
             }
         }
-        public IActionResult Index()
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult Index(int? id)
         {
+            var x = id;
             return View(Cart);
         }
-        [Route("cart/GetCartDetail/{CustomerId}")]
+        [Route("GetCartDetail/{CustomerId}")]
         public IActionResult GetCartDetail(int? CustomerId)
         {
             var cart = _ctx.Orders.Where(p => p.CustomerId == CustomerId).ToList();
