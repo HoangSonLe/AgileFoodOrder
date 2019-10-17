@@ -35,11 +35,9 @@ namespace OrderFoodLast.Controllers
                 return data;
             }
         }
-        [HttpGet]
-        [Route("{id}")]
-        public IActionResult Index(int? id)
+
+        public IActionResult Index()
         {
-            var x = id;
             return View(Cart);
         }
         [Route("GetCartDetail/{CustomerId}")]
