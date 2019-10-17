@@ -1,4 +1,7 @@
-﻿
+﻿@using OrderFoodLast.Models
+@{ 
+    AllInfoOfOrderDetail o = Model;
+}
     <!-- checkout-area-start -->
     <div class="checkout-area mb-70">
         <div class="container">
@@ -11,31 +14,37 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                     <div class="checkout-form-list">
                                         <label>First Name <span class="required">*</span></label>
-                                        <input type="text" placeholder="">
+                                        <input type="text" placeholder="" >
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="checkout-form-list">
                                         <label>Last Name <span class="required">*</span></label>
-                                        <input type="text" placeholder="">
+                                        <input type="text" placeholder="" >
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="checkout-form-list">
                                         <label>Address <span class="required">*</span></label>
-                                        <input type="text" placeholder="Street address">
+                                        <input type="text" placeholder="Street address" >
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="checkout-form-list">
                                         <label>Email Address <span class="required">*</span></label>
-                                        <input type="email" placeholder="">
+                                        <input type="email" placeholder="" value="@o.order.Customer.Email">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="checkout-form-list">
                                         <label>Phone  <span class="required">*</span></label>
-                                        <input type="text" placeholder="Postcode / Zip">
+                                        <input type="text" placeholder="Phone" value="@o.order.Customer.Phone">
+                                    </div>
+                                </div>
+                                <div class="order-notes">
+                                    <div class="checkout-form-list">
+                                        <label>Order Notes</label>
+                                        <textarea placeholder="Notes about your order, e.g. special notes for delivery." rows="10" cols="30" id="checkout-mess">value="@o.order.Comment"</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -53,28 +62,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="cart_item">
-                                            <td class="product-name">
-                                                Vestibulum suscipit <strong class="product-quantity"> × 1</strong>
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">£165.00</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="cart_item">
-                                            <td class="product-name">
-                                                Vestibulum suscipit	<strong class="product-quantity"> × 1</strong>
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">£50.00</span>
-                                            </td>
-                                        </tr>
+                                        @foreach(OrderDetail p in o.orderItems)
+                                        {
+                                            <tr class="cart_item">
+                                                <td class="product-name">
+                                                    @p.Product.ProductName <strong class="product-quantity"> × @p.Quantity</strong>
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">@p.Product.Price*p.Quantity</span>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                     <tfoot>
-                                        <tr class="cart-subtotal">
-                                            <th>Cart Subtotal</th>
-                                            <td><span class="amount">£215.00</span></td>
-                                        </tr>
+                                        
                                         <tr class="shipping">
                                             <th>Shipping</th>
                                             <td>
@@ -96,7 +97,7 @@
                                         <tr class="order-total">
                                             <th>Order Total</th>
                                             <td>
-                                                <strong><span class="amount">£215.00</span></strong>
+                                                <strong><span class="amount">@o.order.Total</span></strong>
                                             </td>
                                         </tr>
                                     </tfoot>

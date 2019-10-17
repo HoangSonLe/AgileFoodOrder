@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrderFoodLast.Helper;
 using OrderFoodLast.Models;
 
@@ -37,13 +38,7 @@ namespace OrderFoodLast.Controllers
         {
             return View(Cart);
         }
-        [Route("cart/GetCartDetail/{CustomerId}")]
-        public IActionResult GetCartDetail(int? CustomerId)
-        {
-            var cart = _ctx.Orders.Where(p => p.CustomerId == CustomerId).ToList();
-            return View("CartDetail",cart);
-        }
-
+        
         [Route("addToCart/{id:int}")]
         public IActionResult AddToCart(int id)
         {
