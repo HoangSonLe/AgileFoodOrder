@@ -1,9 +1,9 @@
-﻿@model IEnumerable<Product>
-
+﻿@model X.PagedList.IPagedList<Product>
+@using X.PagedList.Mvc.Core;
 @{
 
     ViewData.Add("data", "Product");
-  
+
 }
 
 @await Html.PartialAsync("_Breadcrumbs", viewData: this.ViewData)
@@ -14,7 +14,7 @@
             <!--ShopLeft-->
             @await Component.InvokeAsync("ShopLeft")
             <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-               
+
                 <div class="section-title-5 mb-30">
                     <h2>Book</h2>
                 </div>
@@ -58,7 +58,7 @@
                     <div class="tab-pane active" id="th">
                         <div class="row">
                             @foreach (var p in Model)
-                            { 
+                            {
                                 <div class="col-lg-3 col-md-4 col-sm-6">
                                     <!-- single-product-start -->
                                     <div class="product-wrapper mb-40">
@@ -349,20 +349,20 @@
                 </div>
                 <!-- tab-area-end -->
                 <!-- pagination-area-start -->
-                <div class="pagination-area mt-50">
-                    <div class="list-page-2">
-                        <p>Items 1-9 of 11</p>
-                    </div>
-                    <div class="page-number">
-                        <ul>
-                            <li><a href="#" class="active">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#" class="angle"><i class="fa fa-angle-right"></i></a></li>
-                        </ul>
-                    </div>
+            <div class="pagination-area mt-50">
+                <div class="row">
+                    
+                        <div class="col-md-4">Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</div>
+                        <div class="col-md-8">
+                            <div class="pagination" align="center">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new {seotitle = "mon-hap", page}))
+                            </div></div>
+                    
                 </div>
+                
+
+
+            </div>
                 <!-- pagination-area-end -->
             </div>
         </div>
