@@ -44,6 +44,9 @@ namespace OrderFoodLast.Controllers
         {
             List<CartItem> carts = Cart;
             CartItem item = carts.SingleOrDefault(c => c.Product.ProductId == id);
+
+            
+
             if (item == null)
             {
                 Product p = _ctx.Product.Find(id);
