@@ -41,21 +41,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach (var p in Model)
-                            {
-                                var price = String.Format("{0:0,0 vnđ}", p.Product.Price);
-                                var total = String.Format("{0:0,0 vnđ}", p.Total);
-                                
-                                <tr>
-                                    <td class="product-thumbnail"><a href="#"><img src="img/@p.Product.ProductImage" alt="man"/></a></td>
-                                    <td class="product-name"><a href="#">@p.Product.ProductName</a></td>
-                                    <td class="product-price"><span class="amount">@price</span></td>
-                                    <td class="product-quantity"><input type="number" id="value-product-quantity" value="@p.Quantity"></td>
-                                    
-                                    <td class="product-subtotal">@total</td>
-                                    <td class="product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                </tr>
-                            }
+                                @foreach (var p in Model)
+                                {
+                                    var price = String.Format("{0:0,0 vnđ}", p.Product.Price);
+                                    var total = String.Format("{0:0,0 vnđ}", p.Total);
+
+                                    <tr>
+                                        <td class="product-thumbnail"><a href="#"><img src="img/@p.Product.ProductImage" alt="man" /></a></td>
+                                        <td class="product-name"><a href="#">@p.Product.ProductName</a></td>
+                                        <td class="product-price"><span class="amount" id="price_@p.Product.ProductId">@p.Product.Price</span></td>
+                                        <td class="product-quantity"><input type="number" min="1" max="99" onchange="ChangeQty(@p.Product.ProductId)" id="qty_@p.Product.ProductId" value="@p.Quantity"></td>
+                                        <td><p class="font-weight-bold" id="subtotal_@p.Product.ProductId">@p.Total</p></td>
+                                        <td class="product-remove">
+                                            <a onClick="UpdateQuantity(@p.Product.ProductId)"><i class="fa fa-floppy-o"></i></a>
+                                            <a href="#"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -66,8 +68,7 @@
             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                 <div class="buttons-cart mb-30">
                     <ul>
-                        <li><a href="#">Cập nhật</a></li>
-                        <li><a href="#">Tiếp tục mua sắm</a></li>
+                        <li><a asp-action="Index" asp-controller="Home">Tiếp tục mua sắm</a></li>
                     </ul>
                 </div>
             </div>
@@ -82,7 +83,7 @@
                                     <span class="amount">12</span>
                                 </td>
                             </tr>
-                            
+
                             <tr class="order-total">
                                 <th>Tổng Tiền</th>
                                 <td>
@@ -107,12 +108,37 @@
 @await Html.PartialAsync("CartDetail")
 <!-- cart-main-area-end -->
 
-@section Scripts{ 
+@section Scripts{
     <script>
-        $("#value-product-quantity").change(function(e) {
-            var val = $("#value-product-quantity").val();
-            val = val > 0 ? val : 0;
-            $("#value-product-quantity").val(val);
-        });
+
+        function ChangeQty(id) {
+            var qty = $("#qty_" + id).val();
+
+            var price = document.getElementById("price_" + id).innerHTML;
+            var total = document.getElementById("subtotal_" + id).innerHTML = qty * price;
+        }
+
+        function UpdateQuantity(id) {
+            var qty = $("#qty_" + id).val();
+            var price = document.getElementById("price_" + id).innerHTML;
+            var total = document.getElementById("subtotal_" + id).innerHTML = qty * price;
+            var data = JSON.stringify({
+                'id': id,
+                'qty': qty,
+                'total': total
+            });
+            $.ajax({
+                type: "POST",
+                url: "Cart/UpdateCart",
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(response) {
+
+                }
+            });
+        }
+
+
     </script>
 }

@@ -38,7 +38,7 @@ namespace OrderFoodLast.Controllers
         {
             return View(Cart);
         }
-        
+
         [Route("addToCart/{id:int}")]
         public IActionResult AddToCart(int id)
         {
@@ -47,7 +47,7 @@ namespace OrderFoodLast.Controllers
             if (item == null)
             {
                 Product p = _ctx.Product.Find(id);
-                carts.Add(new CartItem { Product = p, Quantity = 1, Total = p.Price});
+                carts.Add(new CartItem { Product = p, Quantity = 1, Total = p.Price });
                 HttpContext.Session.SetObject("Cart", carts);
             }
             else
@@ -58,6 +58,20 @@ namespace OrderFoodLast.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult UpdateCart([FromBody] ActionRequest request)
+        {
+            var id = int.Parse(request.id);
+            var qty = request.qty;
+            var total = request.total;
+            List<CartItem> carts = Cart;
+            CartItem item = carts.SingleOrDefault(c => c.Product.ProductId == id);
+            item.Quantity = int.Parse(qty);
+            item.Total = int.Parse(total);
+            HttpContext.Session.SetObject("Cart", carts);
+            return Ok();
+        }
+
 
         //public IActionResult RemoveCart(int id, string loai)
         //{
