@@ -1,0 +1,114 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container text-center">
+            <h1 class="display-4">Thông tin cá nhân</h1>
+            <p class="lead">Xin chào.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Thông tin</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Đơn đặt hàng</a>
+            </div>
+        </nav>
+        <br />
+        <div class="tab-content" id="nav-tabContent">
+            <!-- thong tin -->
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="row">
+                    <div class="col-6 mt-3">
+                        <div class="form-group">
+                            <h4 class="text-danger">Thông tin cá nhân <i class="fas fa-arrow-down"></i></h4>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Họ</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="lName">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Tên</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="fName">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Địa chỉ</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="address">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Số điện thoại</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="phone">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Email</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="email">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success">Save</button>
+            </div>
+            <!-- end thong tin -->
+            <!-- don dat hang -->
+            <div class="tab-pane fade ml-3 mb-3 mr-3" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-danger">Sản phẩm</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="Nhập thông tin sản phẩm và click chọn từ danh sách gợi ý" readonly class="form-control">
+                    </div>
+                </div>
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">SP</th>
+                            <th scope="col">KG(gr)</th>
+                            <th scope="col">SL</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">T.tiền</th>
+                            <th scope="col">C.chấu</th>
+                            <th scope="col">-</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>bánh plant đậu</th>
+                            <td>
+                                <input type="text" class="form-control" value="1">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" value="10">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" value="500.000">
+                            </td>
+                            <td>500000</td>
+                            <td>
+                                <input type="text" class="form-control" value="0%">
+                            </td>
+                            <td>
+                                <a href=""><i class="fas fa-times-circle"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- end xac nhan -->
+            <!-- dong goi -->
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+            <!-- end dong goi -->
+        </div>
+    </div>
