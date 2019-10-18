@@ -48,7 +48,7 @@ namespace OrderFoodLast.Controllers
             int pageSize = 8;
 
 
-
+            ViewBag.seoTitle = seoTitle;
             return View(products.ToPagedList(pageNumber, pageSize));
         }
        
