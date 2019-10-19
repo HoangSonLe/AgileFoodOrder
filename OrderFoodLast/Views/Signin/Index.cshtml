@@ -15,29 +15,35 @@
             <div class="account-wall">
                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                      alt="">
-                <form class="form-signin">
-                    <input type="text" class="form-control" placeholder="Username" required autofocus>
-                    <input type="password" class="form-control" placeholder="Password" required>
-
-                    <label class="checkbox pull-left">
-                        <input type="checkbox" value="remember-me">
-                        Remember me
-                    </label>
-                    <div class="form-group text-right">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="customer">
-                            <label class="form-check-label" for="inlineRadio1">Khách hàng</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="employee">
-                            <label class="form-check-label" for="inlineRadio2">Nhân viên</label>
-                        </div>
-                    </div>
-                    <hr />
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">
-                        Sign in
-                    </button>
-                </form>
+                @{ 
+                    string error=Context.Request.Query["error"];
+                    if (error == "1")
+                    {
+                        <h4 style="text-align:center;color:red">Sai tên đăng nhập hoặc mật khẩu</h4>
+                    }
+                }
+                        <form class="form-signin" asp-controller="Signin" asp-action="Login" method="post">
+                            <input type="text" class="form-control" placeholder="Username" name="username" required autofocus>
+                            <input type="password" class="form-control" placeholder="Password" name="password" required>
+                            <label class="checkbox pull-left">
+                                <input type="checkbox" value="remember-me">
+                                Remember me
+                            </label>
+                            <div class="form-group text-right">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" checked="checked" id="inlineRadio1" value="customer">
+                                    <label class="form-check-label" for="inlineRadio1">Khách hàng</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="employee">
+                                    <label class="form-check-label" for="inlineRadio2">Nhân viên</label>
+                                </div>
+                            </div>
+                            <hr />
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                Sign in
+                            </button>
+                        </form>
             </div>
             <a href="#" class="text-center new-account">Create an account </a>
         </div>
