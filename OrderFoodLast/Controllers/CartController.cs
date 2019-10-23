@@ -73,28 +73,28 @@ namespace OrderFoodLast.Controllers
         }
 
 
-        //public IActionResult RemoveCart(int id, string loai)
-        //{
-        //    List<CartItem> carts = Cart;
+        public IActionResult RemoveCart(int id)
+        {
+            List<CartItem> carts = Cart;
 
-        //    CartItem item = carts.SingleOrDefault(p => p.Product.ProductId == id);
-        //    if (item != null)
-        //    {
-        //        carts.Remove(item);
+            CartItem item = carts.SingleOrDefault(p => p.Product.ProductId == id);
+            if (item != null)
+            {
+                carts.Remove(item);
 
-        //        HttpContext.Session.SetObject("GioHang", carts);
-        //    }
+                HttpContext.Session.SetObject("Cart", carts);
+            }
 
-        //    if (loai == "AJAX")
-        //    {
-        //        return Json(new
-        //        {
-        //            SoLuong = Cart.Sum(p => p.Quantity),
-        //            TongTien = Cart.Sum(p => p.Total)
-        //        });
-        //    }
+            //if (loai == "AJAX")
+            //{
+            //    return Json(new
+            //    {
+            //        SoLuong = Cart.Sum(p => p.Quantity),
+            //        TongTien = Cart.Sum(p => p.Total)
+            //    });
+            //}
 
-        //    return RedirectToAction("Index");
-        //}
+            return RedirectToAction("Index");
+        }
     }
 }
