@@ -46,6 +46,7 @@ namespace OrderFoodLast.Controllers
                     {
                         userProfile = _ctx.Customer.Where(p => p.CustomerId == info.UserID).Select(p => new UserProfileView
                         {
+                            UserID = p.CustomerId,
                             FirstName = p.FirstName,
                             LastName = p.LastName,
                             Address = p.Address,
@@ -59,6 +60,7 @@ namespace OrderFoodLast.Controllers
                     {
                         userProfile = _ctx.Employee.Where(p => p.EmployeeId == info.UserID).Select(p => new UserProfileView
                         {
+                            UserID = p.EmployeeId,
                             FirstName = p.FirstName,
                             LastName = p.LastName,
                             Address = p.Address,

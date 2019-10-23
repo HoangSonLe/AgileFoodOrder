@@ -8,6 +8,8 @@ namespace OrderFoodLast.Models
 {
     public class UserProfileView
     {
+        [Key]
+        public int UserID { get; set; }
         [Required(ErrorMessage ="Họ tên không được để trống")]
         public string FirstName { get; set; }
 
