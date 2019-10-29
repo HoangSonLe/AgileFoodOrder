@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrderFoodLast.Helper;
 using OrderFoodLast.Models;
 
@@ -23,64 +25,55 @@ namespace OrderFoodLast.Controllers
         {
             get
             {
-                var data = HttpContext.Session.GetObject<List<CartItem>>("GioHang");
+                var data = HttpContext.Session.GetObject<List<CartItem>>("Cart");
                 if (data == null)
                 {
+
                     data = new List<CartItem>();
                 }
-
                 return data;
             }
         }
-
         public IActionResult Index()
         {
             return View(Cart);
         }
 
-        [HttpPost]
-        public IActionResult AddToCart(int productId, int qty, string loai)
+        [Route("addToCart/{id:int}")]
+        public IActionResult AddToCart(int id)
         {
-            //Lấy giỏ hàng đang có ở Session
             List<CartItem> carts = Cart;
-
-            //tìm xem đã có hàng hóa trong giỏ hàng với mã chọn hay chưa
-            CartItem item = carts.SingleOrDefault(p => p.Product.ProductId == productId);
-            if (item != null)//đã có
+            CartItem item = carts.SingleOrDefault(c => c.Product.ProductId == id);
+            if (item == null)
             {
-                item.Quantity += qty;
+                Product p = _ctx.Product.Find(id);
+                carts.Add(new CartItem { Product = p, Quantity = 1, Total = p.Price });
+                HttpContext.Session.SetObject("Cart", carts);
             }
             else
             {
-                Product hh = _ctx.Product.SingleOrDefault(p => p.ProductId == productId);
-
-                if (hh == null)//hàng hóa ko có trong Database
-                    return RedirectToAction("Error", "Home");
-                item = new CartItem
-                {
-                    Product = _mapper.Map<ProductView>(hh),
-                    Quantity = qty
-                };
-
-                carts.Add(item);
+                item.Quantity += 1;
+                item.Total += item.Product.Price;
+                HttpContext.Session.SetObject("Cart", carts);
             }
-
-            //update lại giỏ hàng
-            HttpContext.Session.SetObject("GioHang", carts);
-
-            if (loai == "AJAX")
-            {
-                return Json(new
-                {
-                    SoLuong = Cart.Sum(p => p.Quantity),
-                    TongTien = Cart.Sum(p => p.Total)
-                });
-            }
-
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult UpdateCart([FromBody] ActionRequest request)
+        {
+            var id = int.Parse(request.id);
+            var qty = request.qty;
+            var total = request.total;
+            List<CartItem> carts = Cart;
+            CartItem item = carts.SingleOrDefault(c => c.Product.ProductId == id);
+            item.Quantity = int.Parse(qty);
+            item.Total = int.Parse(total);
+            HttpContext.Session.SetObject("Cart", carts);
+            return Ok();
+        }
 
-        public IActionResult RemoveCart(int id, string loai)
+
+        public IActionResult RemoveCart(int id)
         {
             List<CartItem> carts = Cart;
 
@@ -89,17 +82,17 @@ namespace OrderFoodLast.Controllers
             {
                 carts.Remove(item);
 
-                HttpContext.Session.SetObject("GioHang", carts);
+                HttpContext.Session.SetObject("Cart", carts);
             }
 
-            if (loai == "AJAX")
-            {
-                return Json(new
-                {
-                    SoLuong = Cart.Sum(p => p.Quantity),
-                    TongTien = Cart.Sum(p => p.Total)
-                });
-            }
+            //if (loai == "AJAX")
+            //{
+            //    return Json(new
+            //    {
+            //        SoLuong = Cart.Sum(p => p.Quantity),
+            //        TongTien = Cart.Sum(p => p.Total)
+            //    });
+            //}
 
             return RedirectToAction("Index");
         }

@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using OrderFoodLast.Areas.Admin.Models;
 using OrderFoodLast.Models;
+using X.PagedList;
 
 namespace OrderFoodLast.Controllers
 {
@@ -20,8 +21,7 @@ namespace OrderFoodLast.Controllers
             _ctx = ctx;
             _mapper = mapper;
         }
-        
-        public ActionResult Index(string seoTitle)
+        public ActionResult Index(string seoTitle, int? page)
         {
             var categoryList = _ctx.ProductCategory.AsQueryable();
             List<ProductCategory> category = new List<ProductCategory>();
@@ -30,7 +30,6 @@ namespace OrderFoodLast.Controllers
                                     .Select(p => new ProductCategory
                                                     {
                                                         CategoryId = p.CategoryId
-
                                     }).ToList();
             products = category.Join(_ctx.Product,
                     c => c.CategoryId,
@@ -44,9 +43,13 @@ namespace OrderFoodLast.Controllers
                         Price = p.Price
                     }
 
-                ).ToList();
-            //}).ToList();
-            return View(products);
+                ).OrderBy(x=>x.ProductId).ToList();
+            int pageNumber = page ?? 1;
+            int pageSize = 8;
+
+
+            ViewBag.seoTitle = seoTitle;
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
        
     }

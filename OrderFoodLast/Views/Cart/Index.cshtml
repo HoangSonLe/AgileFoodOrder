@@ -1,6 +1,8 @@
-﻿@{
+﻿@model IEnumerable<CartItem>
 
-    ViewData.Add("data", "Cart");
+@{
+
+    ViewData.Add("data", "Giỏ hàng");
 }
 <!-- breadcrumbs-area-start -->
 @await Html.PartialAsync("_Breadcrumbs", viewData: this.ViewData)
@@ -11,7 +13,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="entry-header-title">
-                    <h2>Cart</h2>
+                    <h2>GIỎ HÀNG</h2>
                 </div>
             </div>
         </div>
@@ -19,6 +21,131 @@
 </div>
 <!-- entry-header-area-end -->
 <!-- cart-main-area-start -->
-@await Html.PartialAsync("ProductCart")
+
+
+<div class="cart-main-area mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form action="#">
+                    <div class="table-content table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">Hình Ảnh</th>
+                                    <th class="product-name">Sản Phẩm</th>
+                                    <th class="product-price">Giá bán</th>
+                                    <th class="product-quantity">Số Lượng</th>
+                                    <th class="product-subtotal">Tổng Tiền</th>
+                                    <th class="product-remove">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in Model)
+                                {
+                                    var price = String.Format("{0:0,0 vnđ}", p.Product.Price);
+                                    var total = String.Format("{0:0,0 vnđ}", p.Total);
+
+                                    <tr>
+                                        <td class="product-thumbnail"><a href="#"><img src="img/@p.Product.ProductImage" alt="man" /></a></td>
+                                        <td class="product-name"><a href="#">@p.Product.ProductName</a></td>
+                                        <td class="product-price"><span class="amount" id="price_@p.Product.ProductId">@p.Product.Price</span></td>
+                                        <td class="product-quantity"><input type="number" min="1" max="99" onchange="ChangeQty(@p.Product.ProductId)" id="qty_@p.Product.ProductId" value="@p.Quantity"></td>
+                                        <td><p class="font-weight-bold" id="subtotal_@p.Product.ProductId">@p.Total</p></td>
+                                        <td class="product-remove">
+                                            <a onClick="UpdateQuantity(@p.Product.ProductId)"><i class="fa fa-floppy-o"></i></a>
+                                            <a id="removeItem" data-id="@p.Product.ProductId"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                <div class="buttons-cart mb-30">
+                    <ul>
+                        <li><a asp-action="Index" asp-controller="Home">Tiếp tục mua sắm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="cart_totals">
+                    <h2>Tổng số giỏ hàng</h2>
+                    <table>
+                        <tbody>
+                            <tr class="order-total">
+                                <th>Số Lượng</th>
+                                <td>
+                                    <span class="amount">12</span>
+                                </td>
+                            </tr>
+
+                            <tr class="order-total">
+                                <th>Tổng Tiền</th>
+                                <td>
+                                    <strong>
+                                        <span class="amount">£215.00</span>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="wc-proceed-to-checkout">
+                        <a href="#">Thanh Toán đơn hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @await Html.PartialAsync("CartDetail")
 <!-- cart-main-area-end -->
+
+@section Scripts{
+    <script>
+
+        function ChangeQty(id) {
+            var qty = $("#qty_" + id).val();
+
+            var price = document.getElementById("price_" + id).innerHTML;
+            var total = document.getElementById("subtotal_" + id).innerHTML = qty * price;
+        }
+
+        function UpdateQuantity(id) {
+            var qty = $("#qty_" + id).val();
+            var price = document.getElementById("price_" + id).innerHTML;
+            var total = document.getElementById("subtotal_" + id).innerHTML = qty * price;
+            var data = JSON.stringify({
+                'id': id,
+                'qty': qty,
+                'total': total
+            });
+            $.ajax({
+                type: "POST",
+                url: "Cart/UpdateCart",
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                }
+            });
+        }
+
+        $("#removeItem").click(function () {
+            var id = $(this).attr("data-id");
+            $.post('/Cart/RemoveCart', { 'id': id }, function (data) {
+                location.reload();
+            });
+
+        });
+
+    </script>
+}
