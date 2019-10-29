@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OrderFoodLast.Helper;
 using OrderFoodLast.Models;
 
 namespace OrderFoodLast.Controllers
@@ -23,7 +24,7 @@ namespace OrderFoodLast.Controllers
         
         public IActionResult Index(int OrderID = 1)
         {
-            //var customerId = HttpContext.Session.GetObject<LogcainInfo>("Info").UserID;
+            var customerId = HttpContext.Session.GetObject<LoginInfo>("Info").UserID;
             //var cart = new AllInfoOfOrderDetail();
             //var order = _ctx.Orders.Where(p => p.OrderId == OrderID).Include(x => x.Customer).SingleOrDefault();
             var order = _ctx.Orders.Where(p => p.OrderId == OrderID)
