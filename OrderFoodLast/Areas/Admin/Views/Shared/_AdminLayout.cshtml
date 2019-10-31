@@ -30,6 +30,8 @@
             <!-- navbar -->
             @await Html.PartialAsync("_MyHeader.cshtml")
             <!-- end navbar -->
+            @RenderSection("Breadscrum", required: false)
+
             <!-- modal view product detail -->
             <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
