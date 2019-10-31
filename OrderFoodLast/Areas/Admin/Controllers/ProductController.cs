@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using OrderFoodLast.Models;
+using OrderFoodLast.Areas.Admin.Models;
+using System.Dynamic;
 
 namespace OrderFoodLast.Areas.Admin.Controllers
 {
@@ -27,8 +29,19 @@ namespace OrderFoodLast.Areas.Admin.Controllers
         [Route("Admin/Product/{id}")]
         public IActionResult Detail(int id)
         {
-            var model = _ctx.Product.Where(p => p.ProductId == id) as Product;
-            return View(model);
+            Product product = _ctx.Product.Find(id);
+            var category = _ctx.ProductCategory.Find(product.CategoryId);
+            var employee = _ctx.Employee.Find(product.CreatedBy);
+            var tmp = _ctx.Employee.Find(product.ModifiedBy);
+            var employeeModified = tmp.FirstName + tmp.LastName;
+            var categories = _ctx.ProductCategory.ToList();
+            List<object> models = new List<object>();
+            models.Add(product);
+            models.Add(category);
+            models.Add(employee);
+            models.Add(categories);
+            models.Add(employeeModified);
+            return View(models);
         }
 
     }

@@ -1,4 +1,12 @@
-﻿
+﻿@model IEnumerable<object>
+@{
+    Product product = Model.ToList()[0] as Product;
+    ProductCategory productCategory = Model.ToList()[1] as ProductCategory;
+    Employee employee = Model.ToList()[2] as Employee;
+    IEnumerable<ProductCategory> categories = Model.ToList()[3] as List<ProductCategory>;
+    string employeeModified =  Model.ToList()[4] as string;
+}
+
 <div class="row">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -19,35 +27,36 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>Tên sản phẩm</label>
-                    <input type="text" name="bookName" class="form-control" value="">
+                    <input type="text" name="bookName" class="form-control" value="@product.ProductName">
                 </div>
                 <div class="form-group">
                     <label>Danh mục</label>
                     <select class="form-control" name="categoryID">
-                        <option></option>
-                        @*<%ArrayList
-                        <CategoryModel>
-                            arrCate =(ArrayList<CategoryModel>
-                                )request.getAttribute("category");
-                                for(int i=0;i<arrCate.size();++i){ CategoryModel cate=arrCate.get(i);
-                                                                   %>
-
-                                    <option <% out.print((book.categoryID==cate.categoryID)?"selected":""); %> value="<%= cate.categoryID %>"><%=cate.name %></option>
-                                    <%} %>*@
+                        @foreach (var item in categories)
+                        {
+                            if (item.CategoryId == productCategory.CategoryId)
+                            {
+                                <option value="@item.CategoryId" selected>@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CategoryId">@item.Name</option>
+                            }
+                        }
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Số lượng</label>
-                    <input type="text" value="" name="quantity" class="form-control" placeholder="500">
+                    <input type="text" value="@product.Quantity" name="quantity" class="form-control" placeholder="500">
                 </div>
                 <div class="form-group">
                     <label>Giá</label>
-                    <input type="text" value="" class="form-control" name="price" placeholder="37000">
+                    <input type="text" value="@product.Price" class="form-control" name="price" placeholder="37000">
                 </div>
                 <div class="form-group">
                     <label>Mô tả</label>
-                    <textarea class="form-control" rows="3" name="description"></textarea>
+                    <textarea class="form-control" rows="3" name="description">@product.Description</textarea>
                 </div>
             </div>
 
@@ -55,7 +64,19 @@
 
                 <div class="form-group">
                     <label>Ngày nhập</label>
-                    <input type="date" value="" name="createDate" class="form-control">
+                    <input type="text" disabled value="@product.CreatedDate" name="createDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Người nhập</label>
+                    <input type="text" disabled value="@product.CreatedBy" name="createBy" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Lần sửa cuối cùng bởi</label>
+                    <input type="text" disabled value="@employeeModified" name="ModifiedBy" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Ngày sửa</label>
+                    <input type="text" disabled value="@product.ModifiedDate" name="ModifiedDate" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Trạng thái</label>
@@ -67,7 +88,7 @@
                 <div class="form-group">
                     <label>Hình ảnh</label>
                     <input class="form-control" name="image" type="file" id="imgInp" />
-                    <img id="blah" src="images/<%= book.image %>" class="image-thumbnail mt-2" />
+                    <img id="blah" src="~/img/@product.ProductImage" class="image-thumbnail mt-2" />
                 </div>
             </div>
 
