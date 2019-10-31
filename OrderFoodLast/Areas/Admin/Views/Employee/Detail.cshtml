@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿@model Employee
+<div class="row">
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -44,36 +45,44 @@
     </div>
 
     <!-- end modal change password -->
-    <form>
+    <form action="#">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
                     <label>Họ</label>
-                    <input type="text" class="form-control" placeholder="Nhập họ">
+                    <input asp-for="FirstName" class=" form-control" placeholder="Nhập họ" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Tên</label>
-                    <input type="text" class="form-control" placeholder="Nhập tên">
+                    <input asp-for="LastName" class="form-control" placeholder="Nhập tên" >
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Tên đăng nhập</label>
-                    <input type="text" class="form-control" placeholder="Nhập tên đăng nhập">
+                    <input asp-for="UserName" class="form-control" placeholder="Nhập tên đăng nhập" >
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Địa chỉ</label>
-                    <input type="text" class="form-control" placeholder="Nhập địa chỉ">
+                    <input asp-for="Address" class="form-control" placeholder="Nhập địa chỉ" >
+                    <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="text" class="form-control" placeholder="Nhập email">
+                    <input asp-for="Email" class="form-control" placeholder="Nhập email" >
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Điện thoại</label>
-                    <input type="text" class="form-control" placeholder="Nhập số điện thoại ">
+                    <input asp-for="Phone" class="form-control" placeholder="Nhập số điện thoại" >
+                    <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Ngày sinh</label>
-                    <input type="date" class="form-control" placeholder="Nhập ngày sinh">
+                    <input asp-for="BirthDate" class="form-control" placeholder="Nhập ngày sinh">
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
                 </div>
             </div>
 
@@ -96,7 +105,8 @@
                 </div>
                 <div class="form-group">
                     <label>Ngày tạo</label>
-                    <input type="date" class="form-control" disabled placeholder="Ngày tạo">
+                    <input asp-for="CreatedDate" class="form-control" placeholder="Ngày tạo" disabled >
+                    <span asp-validation-for="CreatedDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Người tạo</label>
@@ -104,7 +114,8 @@
                 </div>
                 <div class="form-group">
                     <label>Ngày sửa lần cuối</label>
-                    <input type="date" class="form-control" disabled placeholder="Ngày sửa">
+                    <input asp-for="ModifiedDate" class="form-control" placeholder="Ngày sửa lần cuối" disabled>
+                    <span asp-validation-for="ModifiedDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Người sửa lần cuối</label>
@@ -113,8 +124,18 @@
                 <div class="form-group">
                     <label>Trạng thái</label>
                     <select class="form-control">
-                        <option>Enable</option>
-                        <option>Disable</option>
+                        @{
+                            if (Model.Status == 1)
+                            {
+                                <option selected value="1">Enable</option>
+                                <option value="0">Disable</option>
+                            }
+                            else
+                            {
+                                <option>Enable</option>
+                                <option>Disable</option>
+                            }
+                        }
                     </select>
                 </div>
             </div>
