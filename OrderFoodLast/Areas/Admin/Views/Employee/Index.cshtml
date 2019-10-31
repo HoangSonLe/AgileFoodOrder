@@ -1,4 +1,6 @@
-﻿
+﻿@using OrderFoodLast.Areas.Admin.Models
+@model IEnumerable<EmployeeView>
+
 <table class="table table-striped">
     <thead>
         <tr style="white-space:nowrap">
@@ -12,51 +14,29 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>NV-312</td>
-            <td>Hoàng Văn Thành</td>
-            <td>thanhhv317@gmail.com</td>
-            <td>0332072362</td>
-            <td>100Q Hùng Vương - F9 D5 HCMC</td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-info-circle"></i></button>
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    <a href="" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>NV-312</td>
-            <td>Hoàng Văn Thành</td>
-            <td>thanhhv317@gmail.com</td>
-            <td>0332072362</td>
-            <td>100Q Hùng Vương - F9 D5 HCMC</td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-info-circle"></i></button>
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    <a href="" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>NV-312</td>
-            <td>Hoàng Văn Thành</td>
-            <td>thanhhv317@gmail.com</td>
-            <td>0332072362</td>
-            <td>100Q Hùng Vương - F9 D5 HCMC</td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-info-circle"></i></button>
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    <a href="" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                </div>
-            </td>
-        </tr>
+        @{
+            int cnt = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@cnt</th>
+                <td>@item.EmployeeId</td>
+                <td>@item.FirstName @item.LastName</td>
+                <td>@item.Email</td>
+                <td>@item.Phone</td>
+                <td>@item.Address</td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary"><i class="fas fa-info-circle"></i></button>
+                        <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
+                        <a href="" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                    </div>
+                </td>
+            </tr>
+            cnt++;
+        }
+
 
     </tbody>
 </table>
