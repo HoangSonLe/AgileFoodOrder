@@ -10,5 +10,6 @@ namespace OrderFoodLast.Models
         public int UserID { get; set; }
         public string Name { get; set; }
         public string position { get; set; }
+        public int? role { get; set; }
     }
 }
