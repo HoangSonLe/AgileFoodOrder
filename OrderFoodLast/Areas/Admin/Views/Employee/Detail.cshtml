@@ -1,4 +1,19 @@
 ﻿@model Employee
+@using OrderFoodLast.Areas.Admin.Models
+@{
+    IEnumerable<EmployeeInfo> ems = ViewBag.Emp as IEnumerable<EmployeeInfo>;
+    string createdBy = "";
+    string modifiedBy = "";
+
+    if (Model.CreatedBy != null)
+    {
+        createdBy = ems.Where(p => p.ID == Model.CreatedBy.Value).SingleOrDefault().Name;
+    }
+    if (Model.ModifiedBy != null)
+    {
+        modifiedBy = ems.Where(p => p.ID == Model.ModifiedBy.Value).SingleOrDefault().Name;
+    }
+}
 <div class="row">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -11,6 +26,7 @@
     </div>
 </div>            <!-- content -->
 <div class="container">
+
     <!-- Begin modal change password -->
     <div class="modal fade" id="smallShoes" tabindex="-1" role="dialog" aria-labelledby="modalLabelSmall" aria-hidden="true">
         <div class="modal-dialog">
@@ -33,10 +49,10 @@
                             <input type="password" id="confirmNewPass" class="form-control" name="confirmPass">
                             <p style="color:red" id="confirm"></p>
                         </div>
-                       
+
                         <button class="btn btn-success" id="btnChangePass">Lưu thay đổi</button>
-                            
-                        
+
+
                     </form>
                 </div>
 
@@ -56,27 +72,27 @@
                 </div>
                 <div class="form-group">
                     <label>Tên</label>
-                    <input asp-for="LastName" class="form-control" placeholder="Nhập tên" >
+                    <input asp-for="LastName" class="form-control" placeholder="Nhập tên">
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Tên đăng nhập</label>
-                    <input asp-for="UserName" class="form-control" placeholder="Nhập tên đăng nhập" >
+                    <input asp-for="UserName" class="form-control" placeholder="Nhập tên đăng nhập">
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Địa chỉ</label>
-                    <input asp-for="Address" class="form-control" placeholder="Nhập địa chỉ" >
+                    <input asp-for="Address" class="form-control" placeholder="Nhập địa chỉ">
                     <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input asp-for="Email" class="form-control" placeholder="Nhập email" >
+                    <input asp-for="Email" class="form-control" placeholder="Nhập email">
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Điện thoại</label>
-                    <input asp-for="Phone" class="form-control" placeholder="Nhập số điện thoại" >
+                    <input asp-for="Phone" class="form-control" placeholder="Nhập số điện thoại">
                     <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -89,28 +105,42 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>Vai trò</label>
-                    <select class="form-control">
-                        <option>Super Admin</option>
-                        <option>Nhân Viên</option>
-                    </select>
+                    <select asp-for="Role" class="form-control" asp-items="ViewBag.Rol"></select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Người quản lý</label>
-                    <select class="form-control">
-                        <option>Minhlc</option>
-                        <option>Sonlh</option>
-                        <option>Kydq</option>
-                        <option>thanhhv</option>
+                    <select name="ManagerId" class="form-control">
+                        @{
+                            if (Model.ManagerId == null)
+                            {
+                                <option value="0"></option>
+                            }
+                            foreach (EmployeeInfo info in ems)
+                            {
+                                if (info.ID == Model.ManagerId)
+                                {
+                                    <option selected value="@info.ID">@info.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@info.ID">@info.Name</option>
+
+                                }
+                            }
+                        }
                     </select>
+                   
+                    @*<select asp-for="ManagerId" class="form-control" asp-items="ViewBag.Emp"></select>*@
                 </div>
                 <div class="form-group">
                     <label>Ngày tạo</label>
-                    <input asp-for="CreatedDate" class="form-control" placeholder="Ngày tạo" disabled >
+                    <input asp-for="CreatedDate" class="form-control" placeholder="Ngày tạo" disabled>
                     <span asp-validation-for="CreatedDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Người tạo</label>
-                    <input type="text" class="form-control" disabled placeholder="Người tạo">
+                    <input type="text" class="form-control" disabled placeholder="Người tạo" value="@createdBy">
                 </div>
                 <div class="form-group">
                     <label>Ngày sửa lần cuối</label>
@@ -119,7 +149,7 @@
                 </div>
                 <div class="form-group">
                     <label>Người sửa lần cuối</label>
-                    <input type="text" class="form-control" disabled placeholder="Người sửa">
+                    <input type="text" class="form-control" disabled placeholder="Người sửa" value="@modifiedBy">
                 </div>
                 <div class="form-group">
                     <label>Trạng thái</label>
@@ -132,8 +162,8 @@
                             }
                             else
                             {
-                                <option>Enable</option>
-                                <option>Disable</option>
+                                <option value="1">Enable</option>
+                                <option selected value="0">Disable</option>
                             }
                         }
                     </select>
