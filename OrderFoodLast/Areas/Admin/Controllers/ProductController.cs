@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using OrderFoodLast.Models;
 using OrderFoodLast.Areas.Admin.Models;
 using System.Dynamic;
+using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace OrderFoodLast.Areas.Admin.Controllers
 {
-    
+
+    [Area("Admin")]
     public class ProductController : Controller
     {
         private readonly OrderFoodContext _ctx;
@@ -20,12 +23,11 @@ namespace OrderFoodLast.Areas.Admin.Controllers
         {
             _ctx = db; _mapper = mapper;
         }
-        [Area("Admin")]
         public IActionResult Index()
         {
             return View();
         }
-        [Area("Admin")]
+
         [Route("Admin/Product/{id}")]
         public IActionResult Detail(int id)
         {
@@ -44,5 +46,35 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             return View(models);
         }
 
+        [HttpPost]
+        [Route("Admin/Product/{id}")]
+        public IActionResult Update(int id, IFormCollection data)
+        {
+            var product = _ctx.Product.SingleOrDefault(p => p.ProductId == id);
+
+            product.ProductName = data["bookName"];
+            product.CategoryId = int.Parse(data["categoryID"]);
+            product.Quantity = int.Parse(data["quantity"]);
+            product.Price = int.Parse(data["price"]);
+            product.Description = data["description"];
+            product.Status = int.Parse(data["status"]);
+            if (data["image"].Count() == 0)
+            {
+                product.ProductImage = data["image"];
+            }
+            try
+            {
+                _ctx.Product.Update(product);
+                _ctx.SaveChanges();
+                //  Success
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return View("Index");
+            }
+            catch
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            }
+            return Content("Fail!");
+        }
     }
 }
