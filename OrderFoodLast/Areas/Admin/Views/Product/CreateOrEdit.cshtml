@@ -1,0 +1,32 @@
+﻿@model OrderFoodLast.Models.Product
+<div class="row">
+    <div class="col-md">
+        <form asp-action="CreateOrEdit" asp-route-id="@Model.ProductId" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductId" />
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductImage" class="control-label"></label>
+                <div class="col-lg-9">
+                    <input name="Hinh" type="hidden" value="@Model.ProductImage" />
+                    <img src="~/img/@Model.ProductImage" height="200px" width="200px" alt="@Model.ProductImage" />
+                    <input type="file" name="fHinh" class="form-control" />
+                    <span asp-validation-for="ProductImage" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary create-or-edit">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+</div>

@@ -21,6 +21,7 @@ namespace OrderFoodLast.Areas.Admin.ModelViews
         [Display(Name = "Số lượng")]
         public int Quantity { get; set; }
         public string Status { get; set; }
+        public int idCategory { get; set; }
         public string Category { get; set; }
     }
 }
