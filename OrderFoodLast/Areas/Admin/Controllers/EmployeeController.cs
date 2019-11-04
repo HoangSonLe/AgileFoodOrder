@@ -70,6 +70,46 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             }
         }
 
+
+        [Route("Admin/Employee/Update/{id}")]
+        public IActionResult Update(int id)
+        {
+            Employee emp = _ctx.Employee.SingleOrDefault(p => p.EmployeeId == id);
+            return View(emp);
+        }
+
+        [HttpPost]
+        [Route("Admin/Employee/Update/{id}")]
+        public IActionResult Update(int id, IFormCollection data)
+        {
+            try
+            {
+                var info = HttpContext.Session.GetObject<LoginInfo>("Info");
+                Employee emp = _ctx.Employee.Find(id);
+                emp.LastName = data["lastName"];
+                emp.FirstName = data["firstName"];
+                emp.UserName = data["userName"];
+                emp.Password = MD5Hash(data["password"]);
+                emp.Address = data["address"];
+                emp.Email = data["email"];
+                emp.Phone = data["phone"];
+                emp.BirthDate = DateTime.Parse(data["birthday"]);
+                emp.Role = int.Parse(data["role"]);
+                emp.ManagerId = int.Parse(data["managerId"]);
+                emp.Status = int.Parse(data["status"]);
+                emp.CreatedDate = DateTime.Now;
+                emp.ModifiedBy = info.UserID;
+                emp.ModifiedDate = DateTime.Now;
+                _ctx.Employee.Update(emp);
+                _ctx.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         public static string MD5Hash(string text)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
