@@ -1,20 +1,18 @@
-﻿$('ul.pagination > li').addClass('page-item');
-$('ul.pagination > li > span').addClass('page-link');
-$('ul.pagination > li.active').addClass('active');
-$('ul.pagination > li > a').addClass('page-link');
-$(function () {
+﻿$(function () {
 //var selectedVal = $("#inputState option:selected").val();
 //alert(selectedVal);
-    $("#inputState").on("change",function () {
-        var valueSelected = this.value;
+    $("#inputPagination").on("change", function () {
+        var pageNumber = this.value;
+        var metaTitle = $("#inputState option:selected").val();
         $.ajax({
-            url: "/Admin/Product/SelectCategory",
+            url: "/Admin/Product/SelectProduct",
             type: "GET",
             data: {
-                page: 1,
-                metaTitle: valueSelected
+                page: pageNumber,
+                metaTitle: metaTitle
             },
             success: function (data) {
+                console.log(data);
                 $(".bodyContent").html("");
                 $(".bodyContent").html(data);
             }
