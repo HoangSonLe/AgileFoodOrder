@@ -51,7 +51,7 @@
                     <div class="btn-group">
                         <a href="/Admin/employee/@item.EmployeeId" class="btn btn-secondary"><i class="fas fa-info-circle"></i></a>
                         <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                        <a href="/Admin/employee/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Edit" asp-route-id="@item.EmployeeId" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
                     </div>
                 </td>
             </tr>

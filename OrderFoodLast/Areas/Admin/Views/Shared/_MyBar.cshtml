@@ -7,15 +7,15 @@
 
         <ul class="list-unstyled components">
             <li>
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fab fa-product-hunt"></i> Sản Phẩm</a>
+                <a asp-action="index" asp-controller="product"><i class="fab fa-product-hunt"></i> Sản Phẩm</a>
+            </li>
+            <li>
+                <a asp-action="index" asp-controller="order"><i class="fa fa-fw fa-database"></i> Đơn hàng</a>
+            </li>
+            <li>
+                <a asp-action="index" asp-controller="employee"><i class="fa fa-fw fa-user"></i> Nhân viên</a>
             </li>
 
-            <li>
-                <a href="#"><i class="fa fa-fw fa-database"></i> Danh mục</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-fw fa-user"></i> Nhà sản xuất</a>
-            </li>
         </ul>
     </div>
 </nav>

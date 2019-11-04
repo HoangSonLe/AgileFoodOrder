@@ -85,7 +85,7 @@ namespace OrderFoodLast
             {
                 routes.MapRoute(
                   name: "Area",
-                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                  template: "{area:exists}/{controller=product}/{action=Index}/{id?}"
                 );
             });
         }
