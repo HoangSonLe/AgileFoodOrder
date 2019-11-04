@@ -5,9 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OrderFoodLast.Areas.Admin.Models;
 using OrderFoodLast.Models;
+using X.PagedList;
 
 namespace OrderFoodLast.Areas.Admin.Controllers
-{ 
+{
     [Area("Admin")]
     public class EmployeeController : Controller
     {
@@ -20,34 +21,13 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             _ctx = ctx;
             _mapper = mapper;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+
 
         [Route("Admin/Employee/{id}")]
         public IActionResult Detail(int id)
         {
             Employee info;
             info = _ctx.Employee.Where(p => p.EmployeeId == id)
-                            //.Select(p=>new EmployeeInfo
-                            //{
-                            //    ID=p.EmployeeId,
-                            //    FirstName=p.FirstName,
-                            //    LastName=p.LastName,
-                            //    Username=p.UserName,
-                            //    Address=p.Address,
-                            //    Email=p.Email,
-                            //    Phone=p.Phone,
-                            //    BirthDate=p.BirthDate,
-                            //    Role=p.Role,
-                            //    Manager=p.ManagerId,
-                            //    CreatedDate=p.CreatedDate,
-                            //    CreatedBy=p.CreatedBy,
-                            //    ModifiedDate=p.ModifiedDate,
-                            //    ModifiedBy=p.ModifiedBy,
-                            //    Status=p.Status
-                            //})
                             .SingleOrDefault();
             var role = _ctx.Roles.Find(info.Role);
             ViewData["Rol"] = new SelectList(_ctx.Roles, "RoleId", "RoleName", role.RoleId);
@@ -59,6 +39,20 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             }).ToList();
             ViewData["Emp"] = list;
             return View(info);
+        }
+
+        public IActionResult Index(int? page)
+        {
+            // danh sach employee trong model 
+            var employeeList = _ctx.Employee.ToList();
+
+            var employees = _mapper.Map<List<EmployeeView>>(employeeList);
+            int pageNumber = page ?? 1;
+            ViewBag.employeeViews = employees.ToPagedList(pageNumber, 1);
+
+            return View(employees);
+
+
         }
 
         public IActionResult Edit()

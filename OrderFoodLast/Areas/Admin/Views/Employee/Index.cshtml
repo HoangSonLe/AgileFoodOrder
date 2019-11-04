@@ -1,4 +1,27 @@
-﻿
+﻿@using OrderFoodLast.Areas.Admin.Models
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@model IEnumerable<EmployeeView>
+<div class="row">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb d-flex justify-content-end">
+                <li class="breadcrumb-item active">
+                    <div class="btn-group" role="group">
+                        <input type="text">
+                        <button type="button" class="btn btn-outline-danger">Tìm kiếm</button>
+                    </div>
+                </li>
+                <li class="breadcrumb-item active">
+                    <div class="btn-group" role="group">
+                        <a href="add-product.html" class="btn btn-outline-success"><i class="fas fa-plus"></i> Thêm mới</a>
+                        <button type="button" class="btn btn-outline-primary">Thống kê</button>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
 <table class="table table-striped">
     <thead>
         <tr style="white-space:nowrap">
@@ -12,51 +35,29 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>NV-312</td>
-            <td>Hoàng Văn Thành</td>
-            <td>thanhhv317@gmail.com</td>
-            <td>0332072362</td>
-            <td>100Q Hùng Vương - F9 D5 HCMC</td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-info-circle"></i></button>
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    <a href="" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>NV-312</td>
-            <td>Hoàng Văn Thành</td>
-            <td>thanhhv317@gmail.com</td>
-            <td>0332072362</td>
-            <td>100Q Hùng Vương - F9 D5 HCMC</td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-info-circle"></i></button>
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    <a href="" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>NV-312</td>
-            <td>Hoàng Văn Thành</td>
-            <td>thanhhv317@gmail.com</td>
-            <td>0332072362</td>
-            <td>100Q Hùng Vương - F9 D5 HCMC</td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-info-circle"></i></button>
-                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    <a href="" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                </div>
-            </td>
-        </tr>
+        @{
+            int cnt = 1;
+        }
+        @foreach (var item in ViewBag.employeeViews)
+        {
+            <tr>
+                <th scope="row">@cnt</th>
+                <td>@item.EmployeeId</td>
+                <td>@item.FirstName @item.LastName</td>
+                <td>@item.Email</td>
+                <td>@item.Phone</td>
+                <td>@item.Address</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="/Admin/employee/@item.EmployeeId" class="btn btn-secondary"><i class="fas fa-info-circle"></i></a>
+                        <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
+                        <a href="/Admin/employee/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                    </div>
+                </td>
+            </tr>
+            cnt++;
+        }
+
 
     </tbody>
 </table>
@@ -64,14 +65,15 @@
 <!--pagination -->
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-end">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-        </li>
+        @Html.PagedListPager((IPagedList)ViewBag.employeeViews, page => Url.Action("Index", new { page = page }))
     </ul>
 </nav>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+    $('ul.pagination > li').addClass('page-item');
+    $('ul.pagination > li > span').addClass('page-link');
+    $('ul.pagination > li.active').addClass('active');
+    $('ul.pagination > li > a').addClass('page-link');
+</script>
