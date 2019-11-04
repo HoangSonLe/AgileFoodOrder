@@ -33,7 +33,7 @@
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary sua-loai" data-maloai="@p.ProductId" data-target="#myModal"><i class="fas fa-eye"></i></button>
-                            <button type="button" class="btn btn-secondary"><i class="fas fa-edit"></i></button>
+                            <a asp-action="Update" asp-route-id="@p.ProductId" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
                             <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
                         </div>
                     </td>
