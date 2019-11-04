@@ -1,118 +1,95 @@
-﻿
-
-<!--Content-->
-<div class="row">
+﻿@model IEnumerable<ProductCategory>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@await Html.PartialAsync("Breadcrum", Model)
+<div class="row bodyContent">
     <table class="table table-responsive">
         <thead class="thead-light">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Tên</th>
-                <th scope="col">Hình ảnh</th>
-                <th scope="col">Giá</th>
-                <th scope="col">Số lượng</th>
-                <th scope="col">Nhà sản xuất</th>
-                <th scope="col">Ngày nhập</th>
-                <th scope="col">Trạng thái</th>
-                <th scope="col">Chức năng</th>
+                <th scope="col" width="5%">#</th>
+                <th scope="col" width="20%">Tên</th>
+                <th scope="col" width="15%">Hình ảnh</th>
+                <th scope="col" width="10%">Giá</th>
+                <th scope="col" width="10%">Số lượng</th>
+                <th scope="col" width="10%">Phân Loại</th>
+                <th scope="col" width="10%">Trạng thái</th>
+                <th scope="col" width="15%">Chức năng</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td><a class="view-product" data-toggle="modal" data-target=".bd-example-modal-xl"> Doremon meo may thông minh đáng yêu ghê</a></td>
-                <td>
-                    <img src="https://vignette.wikia.nocookie.net/doraemon/images/b/b8/Doraemon_2005.PNG/revision/latest?cb=20151207094313&path-prefix=en" alt="do-re-mon" class="img-thumbnail product-img">
-                </td>
-                <td>10000 VND</td>
-                <td>355</td>
-                <td>NXB Nhí</td>
-                <td>12/2/1998</td>
-                <td>Active</td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td><a class="view-product" data-toggle="modal" data-target=".bd-example-modal-xl"> Doremon meo may thông minh đáng yêu ghê</a></td>
-                <td>
-                    <img src="https://vignette.wikia.nocookie.net/doraemon/images/b/b8/Doraemon_2005.PNG/revision/latest?cb=20151207094313&path-prefix=en" alt="do-re-mon" class="img-thumbnail product-img">
-                </td>
-                <td>10000 VND</td>
-                <td>355</td>
-                <td>NXB Nhí</td>
-                <td>12/2/1998</td>
-                <td>Active</td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td><a class="view-product" data-toggle="modal" data-target=".bd-example-modal-xl"> Doremon meo may thông minh đáng yêu ghê</a></td>
-                <td>
-                    <img src="https://vignette.wikia.nocookie.net/doraemon/images/b/b8/Doraemon_2005.PNG/revision/latest?cb=20151207094313&path-prefix=en" alt="do-re-mon" class="img-thumbnail product-img">
-                </td>
-                <td>10000 VND</td>
-                <td>355</td>
-                <td>NXB Nhí</td>
-                <td>12/2/1998</td>
-                <td>Active</td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td><a class="view-product" data-toggle="modal" data-target=".bd-example-modal-xl"> Doremon meo may thông minh đáng yêu ghê</a></td>
-                <td>
-                    <img src="https://st.gamevui.com/images/image/2019/02/19/doraemon-640.jpg" alt="do-re-mon" class="img-thumbnail product-img">
-                </td>
-                <td>10000 VND</td>
-                <td>355</td>
-                <td>NXB Nhí</td>
-                <td>12/2/1998</td>
-                <td>Active</td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
-                    </div>
-                </td>
-            </tr>
-
+        <tbody id="contentTable">
+            @foreach (var p in ViewBag.productsView)
+            {
+                var price = String.Format("{0:0,0 VNĐ}", p.Price);
+                <tr>
+                    <th scope="row">@p.ProductId</th>
+                    <td><a class="view-product" data-toggle="modal" data-target=".bd-example-modal-xl">@p.ProductName</a></td>
+                    <td>
+                        <img src="~/img/@p.ProductImage" alt="@p.ProductImage" style="width:90px; height:80px;" class="img-thumbnail">
+                    </td>
+                    <td>@price</td>
+                    <td>@p.Quantity</td>
+                    <td>@p.Category</td>
+                    <td>@p.Status</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary sua-loai" data-maloai="@p.ProductId" data-target="#myModal"><i class="fas fa-eye"></i></button>
+                            <button type="button" class="btn btn-secondary"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
-
-    <!-- pagination -->
-    <div class="container d-flex justify-content-center">
+    <div class="container">
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <select id="inputPagination" class="page-link" height="20px" ; style="height:38px">
+                    @for (int i = 1; i <= ViewBag.TongSoTrang; ++i)
+                    {
+                        var valOption = i - 1;
+                        if (valOption == ViewBag.SelectedPage)
+                        {
+                            <option selected value="@valOption">@i</option>
+                        }
+                        else
+                        {
+
+                            <option value="@valOption">@i</option>
+                        }
+
+                    }
+                </select>
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
+                    <a class="page-link" href="#">Next</a>
                 </li>
             </ul>
         </nav>
     </div>
-    <!-- end pagination -->
-
+    
+    <div class="modal fade bd-example-modal-md" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Thông tin</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="~/js/Admin/Product.js"></script>
 </div>
+<script src="~/js/Admin/ProductIndex.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
