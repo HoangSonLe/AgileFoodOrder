@@ -130,5 +130,16 @@ namespace OrderFoodLast.Areas.Admin.Controllers
 
             return strBuilder.ToString();
         }
+
+        [HttpPost]
+        [Route("Admin/Employee/Delete")]
+        public IActionResult Delete(int id)
+        {
+            Employee emp = _ctx.Employee.SingleOrDefault(p => p.EmployeeId == id);
+            _ctx.Employee.Remove(emp);
+            _ctx.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }
