@@ -6,12 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace OrderFoodLast.Areas.Admin.Controllers
 {
-    [Area("Admin")]
     public class ProductController : Controller
     {
+        [Area("Admin")]
         public IActionResult Index()
         {
             return View();
         }
+
+
+
     }
 }

@@ -1,23 +1,79 @@
-﻿
-@{
-    Layout = null;
+﻿@section BreadScrum{
+    @await Html.PartialAsync("_Breadcrum.cshtml")
 }
+<table class="table table-striped">
+    <thead>
+        <tr style="white-space:nowrap">
+            <th scope="col">#</th>
+            <th scope="col">Mã nhân viên</th>
+            <th scope="col">Tên nhân viên</th>
+            <th scope="col">Email</th>
+            <th scope="col">Điện thoại</th>
+            <th scope="col">Địa chỉ</th>
+            <th scope="col">Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>NV-312</td>
+            <td>Hoàng Văn Thành</td>
+            <td>thanhhv317@gmail.com</td>
+            <td>0332072362</td>
+            <td>100Q Hùng Vương - F9 D5 HCMC</td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary"><i class="fas fa-info-circle"></i></button>
+                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
+                    <a href="" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">1</th>
+            <td>NV-312</td>
+            <td>Hoàng Văn Thành</td>
+            <td>thanhhv317@gmail.com</td>
+            <td>0332072362</td>
+            <td>100Q Hùng Vương - F9 D5 HCMC</td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary"><i class="fas fa-info-circle"></i></button>
+                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
+                    <a href="" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">1</th>
+            <td>NV-312</td>
+            <td>Hoàng Văn Thành</td>
+            <td>thanhhv317@gmail.com</td>
+            <td>0332072362</td>
+            <td>100Q Hùng Vương - F9 D5 HCMC</td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary"><i class="fas fa-info-circle"></i></button>
+                    <button type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
+                    <a href="" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                </div>
+            </td>
+        </tr>
 
-<!DOCTYPE html>
+    </tbody>
+</table>
 
-<html>
-@await Html.PartialAsync("_MyHeader")
-<body>
-    <div class="wrapper">
-        @await Html.PartialAsync("_MyNav")
-        <div class="container">
-            @await Html.PartialAsync("_MyBar")
-
-           <!-- this is content-->
-        </div>
-
-    </div>
-
-</body>
-@await Html.PartialAsync("_MyFooter")
-</html>
+<!--pagination -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>

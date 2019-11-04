@@ -134,7 +134,13 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-
+                    swal(
+                      'Cập nhật thành công!',
+                      'Nhấp vào Ok để tiếp tục!',
+                      'success'
+                    )
+                    var cnt = parseInt($("#cntCart").html());
+                    $("#cntCart").html(response + cnt);
                 }
             });
         }

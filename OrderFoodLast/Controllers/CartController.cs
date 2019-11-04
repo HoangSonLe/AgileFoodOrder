@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -59,17 +60,20 @@ namespace OrderFoodLast.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public IActionResult UpdateCart([FromBody] ActionRequest request)
+        public int UpdateCart([FromBody] ActionRequest request)
         {
             var id = int.Parse(request.id);
-            var qty = request.qty;
+            int qty = int.Parse(request.qty);
             var total = request.total;
             List<CartItem> carts = Cart;
             CartItem item = carts.SingleOrDefault(c => c.Product.ProductId == id);
-            item.Quantity = int.Parse(qty);
+            int changeCnt = qty - item.Quantity;
+            item.Quantity = qty;
             item.Total = int.Parse(total);
             HttpContext.Session.SetObject("Cart", carts);
-            return Ok();
+            //  Success
+            Response.StatusCode = (int)HttpStatusCode.OK;
+            return changeCnt;
         }
 
 

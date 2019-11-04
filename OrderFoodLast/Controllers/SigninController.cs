@@ -69,7 +69,7 @@ namespace OrderFoodLast.Controllers
                         if (employee != null)
                         {
                             isLoginSuccess = true;
-                            SaveSession(employee.EmployeeId, employee.FirstName + " " + employee.LastName,"nv");
+                            SaveSession(employee.EmployeeId, employee.FirstName + " " + employee.LastName,"nv", employee.Role);
                         }
                         break;
                 }
@@ -83,13 +83,14 @@ namespace OrderFoodLast.Controllers
             HttpContext.Session.SetObject<LoginInfo>("Info", null);
             return Redirect("/");
         }
-        public void SaveSession(int id, string name, string position)
+        public void SaveSession(int id, string name, string position, int? role=0)
         {
             LoginInfo login = new LoginInfo
             {
                 UserID = id,
                 Name = name,
-                position=position
+                position=position,
+                role=role
             };
             HttpContext.Session.SetObject<LoginInfo>("Info", login);
         }
