@@ -35,8 +35,11 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             Employee info;
             info = _ctx.Employee.Where(p => p.EmployeeId == id)
                             .SingleOrDefault();
-            var role = _ctx.Roles.Find(info.Role);
-            ViewData["Rol"] = new SelectList(_ctx.Roles, "RoleId", "RoleName", role.RoleId);
+            var r = _ctx.Roles.Where(p => p.RoleId == info.Role).SingleOrDefault();
+            if (r != null)
+            {
+                ViewBag.Role = r.RoleName;
+            }
             //ViewData["Emp"] = new SelectList(_ctx.Employee, "EmployeeId", "LastName", info.ManagerId);
             List<EmployeeInfo> list = _ctx.Employee.Select(p => new EmployeeInfo
             {

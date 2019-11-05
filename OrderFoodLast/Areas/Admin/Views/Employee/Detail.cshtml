@@ -1,4 +1,4 @@
-﻿@model Employee
+﻿@*@model Employee
 @using OrderFoodLast.Areas.Admin.Models
 @{
     IEnumerable<EmployeeInfo> ems = ViewBag.Emp as IEnumerable<EmployeeInfo>;
@@ -14,6 +14,8 @@
         modifiedBy = ems.Where(p => p.ID == Model.ModifiedBy.Value).SingleOrDefault().Name;
     }
 }
+@ViewBag.Role
+@ViewBag.Manager
 <div class="row">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -180,5 +182,5 @@
         </div>
     </form>
 
-</div>
+</div>*@
 
