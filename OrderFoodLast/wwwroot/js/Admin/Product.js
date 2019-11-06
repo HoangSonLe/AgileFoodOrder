@@ -12,7 +12,6 @@
                 metaTitle: metaTitle
             },
             success: function (data) {
-                console.log(data);
                 $(".bodyContent").html("");
                 $(".bodyContent").html(data);
             }
@@ -20,7 +19,6 @@
     });
     $(".sua-loai").click(function () {
         var maLoai = $(this).data("maloai");
-        
         $.ajax({
             url: "/Admin/Product/CreateOrEdit",
             type: "GET",

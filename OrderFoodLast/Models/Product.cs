@@ -30,6 +30,8 @@ namespace OrderFoodLast.Models
         public int? ViewCounts { get; set; }
 
         public virtual ProductCategory Category { get; set; }
+        public virtual Employee CreatedByNavigation { get; set; }
+        public virtual Employee ModifiedByNavigation { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         public virtual ICollection<ProductImages> ProductImages { get; set; }

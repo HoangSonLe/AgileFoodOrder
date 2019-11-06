@@ -12,6 +12,8 @@ namespace OrderFoodLast.Models
             Orders = new HashSet<Orders>();
             ProductCategoryCreatedByNavigation = new HashSet<ProductCategory>();
             ProductCategoryModifiedByNavigation = new HashSet<ProductCategory>();
+            ProductCreatedByNavigation = new HashSet<Product>();
+            ProductModifiedByNavigation = new HashSet<Product>();
         }
 
         public int EmployeeId { get; set; }
@@ -38,5 +40,7 @@ namespace OrderFoodLast.Models
         public virtual ICollection<Orders> Orders { get; set; }
         public virtual ICollection<ProductCategory> ProductCategoryCreatedByNavigation { get; set; }
         public virtual ICollection<ProductCategory> ProductCategoryModifiedByNavigation { get; set; }
+        public virtual ICollection<Product> ProductCreatedByNavigation { get; set; }
+        public virtual ICollection<Product> ProductModifiedByNavigation { get; set; }
     }
 }

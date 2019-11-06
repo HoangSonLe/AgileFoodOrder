@@ -107,7 +107,12 @@ namespace OrderFoodLast.Areas.Admin.Controllers
         public IActionResult SearchByName(int page, string metaTitle, string ProductName)
         {
             int SoSP1Trang = 5;
-            var productsList = _ctx.Product.Where(p => p.Category.MetaTitle == metaTitle).Skip(page * SoSP1Trang).Take(SoSP1Trang).Include(p => p.Category).ToList();
+            var productsList = _ctx.Product.Include(p => p.Category).ToList();
+            if (metaTitle!= null)
+            {
+                 productsList = _ctx.Product.Where(p => p.Category.MetaTitle == metaTitle).Include(p => p.Category).ToList();
+
+            }
             var products = from p in productsList
                            where EF.Functions.Like(p.ProductName, $"%{ProductName}%")
                            select new ProductViewAdmin()
@@ -144,18 +149,15 @@ namespace OrderFoodLast.Areas.Admin.Controllers
         //[Route("Admin/Product/{id}")]
         public IActionResult Update(int id)
         {
-            Product product = _ctx.Product.Find(id);
-            var category = _ctx.ProductCategory.Find(product.CategoryId);
-            var employee = _ctx.Employee.Find(product.CreatedBy);
-            var tmp = _ctx.Employee.Find(product.ModifiedBy);
-            var employeeModified = tmp.FirstName + tmp.LastName;
+            Product product = _ctx.Product.Where(p=>p.ProductId == id)
+                                          .Include(x=>x.Category)
+                                          .Include(x=>x.CreatedByNavigation)
+                                          .Include(x => x.ModifiedByNavigation)
+                                          .SingleOrDefault();
             var categories = _ctx.ProductCategory.ToList();
             List<object> models = new List<object>();
             models.Add(product);
-            models.Add(category);
-            models.Add(employee);
             models.Add(categories);
-            models.Add(employeeModified);
             return View("Detail",models);
         }
 
@@ -170,8 +172,11 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             product.CategoryId = int.Parse(data["categoryID"]);
             product.Quantity = int.Parse(data["quantity"]);
             product.Price = int.Parse(data["price"]);
+            product.PromotionPrice = int.Parse(data["promotionPrice"]);
             product.Description = data["description"];
+            product.ModifiedDate = DateTime.Now;
             product.Status = int.Parse(data["status"]);
+            product.IncludeVat = data["IncludeVat"]==1?true:false;
             if (data["image"].Count() == 0)
             {
                 product.ProductImage = data["image"];

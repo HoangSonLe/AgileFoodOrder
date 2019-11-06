@@ -1,73 +1,82 @@
 ﻿@model OrderFoodLast.Models.Product
+<div style="padding: 0 15px 0 15px">
     <div class="row">
         <div class="col-5">
-            <img src="~/img/@Model.ProductImage" style="height:200px;width:200px; margin:0 10px 0 -5px; border:1px solid gray; border-radius:10px;" alt="@Model.ProductImage" />
+            <img src="~/img/@Model.ProductImage" style="height:225px;width:225px; margin:0 0 0 10px; border:1px solid gray; border-radius:10px;" alt="@Model.ProductImage" />
             <span asp-validation-for="ProductImage" class="text-danger"></span>
         </div>
         <div class="col-7">
-            <input type="hidden" asp-for="ProductId" />
-            <div class="form-group">
-                <label class="control-label">Tên Sản Phẩm</label>
-                <input asp-for="ProductName" class="form-control" disabled />
-                <span asp-validation-for="ProductName" class="text-danger"></span>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label"><b>Tên Sản Phẩm: </b></label>
+                <div class="col-sm-4">
+                    <input type="text" readonly="" class="form-control-plaintext" value="@Model.ProductName">
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">Loại</label>
-                <input asp-for="Category.Name" class="form-control" disabled />
-                <span asp-validation-for="Category.Name" class="text-danger"></span>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label"><b>Loại Sản Phẩm: </b></label>
+                <div class="col-sm-6">
+                    <input type="text" readonly="" class="form-control-plaintext" value="@Model.Category.Name">
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">Ngày tạo</label>
-                <input asp-for="CreatedDate" class="form-control" disabled />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label"><b>Ngày Sửa: </b></label>
+                <div class="col-sm-6">
+                    <input type="text" readonly="" class="form-control-plaintext" value="@Model.ModifiedDate">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-7 col-form-label"><b>Bao gồm VAT: </b></label>
+                <div class="col-sm-5">
+                    @{
+                        var vat = Model.IncludeVat == true ? "True" : "False";
+                    }
+                    <input type="text" readonly="" class="form-control-plaintext" value="@vat">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-7 col-form-label"><b>Tình Trạng: </b></label>
+                <div class="col-sm-5">
+                    @{
+                        var status = Model.Status == 1 ? "Active" : "No Active";
+                    }
+                    <input type="text" readonly="" class="form-control-plaintext" value="@status">
+                </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
-            <div class="form-group">
-                <label class="control-label">Giá</label>
-                <input asp-for="Price" class="form-control" disabled />
-                <span asp-validation-for="Price" class="text-danger"></span>
+            <div class="form-group row">
+                <label class="col-sm-7 col-form-label"><b>Giá Sản Phẩm: </b></label>
+                <div class="col-sm-5">
+                    <input type="text" readonly="" class="form-control-plaintext" value="@Model.Price VNĐ">
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">Giá Giảm</label>
-                <input asp-for="PromotionPrice" class="form-control" disabled />
-                <span asp-validation-for="PromotionPrice" class="text-danger"></span>
+            <div class="form-group row">
+                <label class="col-sm-7 col-form-label"><b>Giá Giảm: </b></label>
+                <div class="col-sm-5">
+                    <input type="text" readonly="" class="form-control-plaintext" value="@Model.PromotionPrice VNĐ">
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">Bao gồm VAT</label>
-                <input asp-for="IncludeVat" class="form-control" disabled />
-                <span asp-validation-for="IncludeVat" class="text-danger"></span>
-            </div>
+            
         </div>
         <div class="col-6">
-            <div class="form-group">
-                <label class="control-label">Số Lượng</label>
-                <input asp-for="Quantity" class="form-control" disabled />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
+            <div class="form-group row">
+                <label class="col-sm-7 col-form-label"><b>Số Lượng: </b></label>
+                <div class="col-sm-5">
+                    <input type="text" readonly="" class="form-control-plaintext" value="@Model.Quantity">
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">Tình trạng</label>
-                <input asp-for="Status" class="form-control" disabled />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Lượt xem</label>
-                <input asp-for="ViewCounts" class="form-control" disabled />
-                <span asp-validation-for="ViewCounts" class="text-danger"></span>
-            </div>
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label class="control-label">Mô tả</label>
-                <textarea>@Model.Description</textarea>
+           
+            <div class="form-group row">
+                <label class="col-sm-7 col-form-label"><b>Lượt Xem: </b></label>
+                <div class="col-sm-5">
+                    <input type="text" readonly="" class="form-control-plaintext" value="@Model.ViewCounts">
+                </div>
             </div>
         </div>
     </div>
     <div>
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     </div>
+</div>

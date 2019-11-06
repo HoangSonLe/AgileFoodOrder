@@ -1,12 +1,8 @@
 ﻿@model IEnumerable<object>
 @{
     Product product = Model.ToList()[0] as Product;
-    ProductCategory productCategory = Model.ToList()[1] as ProductCategory;
-    Employee employee = Model.ToList()[2] as Employee;
-    IEnumerable<ProductCategory> categories = Model.ToList()[3] as List<ProductCategory>;
-    string employeeModified =  Model.ToList()[4] as string;
+    IEnumerable<ProductCategory> categories = Model.ToList()[1] as List<ProductCategory>;
 }
-
 <div class="row">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -21,7 +17,7 @@
 
 <!-- content -->
 <div class="container">
-    <form enctype="multipart/form-data" asp-action="Update">
+    <form enctype="multipart/form-data" asp-action="Update" method="post">
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
@@ -33,7 +29,7 @@
                     <select class="form-control" name="categoryID">
                         @foreach (var item in categories)
                         {
-                            if (item.CategoryId == productCategory.CategoryId)
+                            if (item.CategoryId == product.CategoryId)
                             {
                                 <option value="@item.CategoryId" selected>@item.Name</option>
                             }
@@ -44,18 +40,47 @@
                         }
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label>Số lượng</label>
-                    <input type="text" value="@product.Quantity" name="quantity" class="form-control" placeholder="0"/>
+                    <input type="number" value="@product.Quantity" name="quantity" class="form-control" placeholder="0" />
                 </div>
                 <div class="form-group">
                     <label>Giá</label>
-                    <input type="text" value="@product.Price" class="form-control" name="price" placeholder="0">
+                    <input type="number" value="@product.Price" class="form-control" name="price" placeholder="0">
                 </div>
                 <div class="form-group">
-                    <label>Mô tả</label>
-                    <textarea class="form-control" rows="3" name="description">@product.Description</textarea>
+                    <label>Giá Giảm</label>
+                    <input type="number" value="@product.PromotionPrice" class="form-control" name="promotionPrice" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label>Bao gồm VAT</label>
+                    <select class="form-control" name="IncludeVat">
+                        @if (product.IncludeVat == true)
+                        {
+                            <option selected value="1">True</option>
+                            <option value="0">False</option>
+                        }
+                        else
+                        {
+                            <option value="1">True</option>
+                            <option selected value="0">False</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Trạng thái</label>
+                    <select class="form-control" name="status">
+                        @if (product.Status == 1)
+                        {
+                        <option selected value="1">Enable</option>
+                        <option value="0">Disable</option>
+                        }
+                        else
+                        {
+                            <option value="1">Enable</option>
+                            <option selected value="0">Disable</option>
+                        }
+                    </select>
                 </div>
             </div>
 
@@ -63,26 +88,19 @@
 
                 <div class="form-group">
                     <label>Ngày nhập</label>
-                    <input type="text" disabled value="@product.CreatedDate" name="createDate" class="form-control">
+                    <input type="datetime" disabled value="@product.CreatedDate" name="createDate" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Người nhập</label>
-                    <input type="text" disabled value="@product.CreatedBy" name="createBy" class="form-control">
+                    <input type="text" disabled value="@product.CreatedByNavigation.FirstName + @product.CreatedByNavigation.LastName" name="createBy" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Lần sửa cuối cùng bởi</label>
-                    <input type="text" disabled value="@employeeModified" name="ModifiedBy" class="form-control">
+                    <input type="text" disabled value="@product.ModifiedByNavigation.FirstName + @product.ModifiedByNavigation.LastName" name="ModifiedBy" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Ngày sửa</label>
-                    <input type="text" disabled value="@product.ModifiedDate" name="ModifiedDate" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Trạng thái</label>
-                    <select class="form-control" name="status">
-                        <option value="1">Enable</option>
-                        <option value="0">Disable</option>
-                    </select>
+                    <label>Ngày sửa lần cuối</label>
+                    <input type="datetime" disabled value="@product.ModifiedDate" name="modifiedDate" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Hình ảnh</label>
@@ -90,12 +108,47 @@
                     <img id="blah" src="~/img/@product.ProductImage" class="image-thumbnail mt-2" />
                 </div>
             </div>
-
-            <br>
-            <div class="container mt-2 mb-4">
-                <button class="btn btn-success saveChange" data-id="@product.ProductId"><i class="fas fa-save"></i> Save</button>
+        </div>
+        <div class="row">
+            <div class="form-group col-12">
+                <label>Mô tả</label>
+                <textarea id="description" name="description">@product.Description</textarea>
+                @*<textarea class="form-control" rows="3" name="description">@product.Description</textarea>*@
             </div>
+        </div>
+        <div class="container mt-2 mb-4">
+            <button class="btn btn-success saveChange" data-id="@product.ProductId"><i class="fas fa-save"></i> Save</button>
         </div>
     </form>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+
+<script>
+    $(function () {
+        var markupStr = $('#description').summernote('code');
+
+        $('#description').summernote({
+          height: 300,                 // set editor height
+          minHeight: null,             // set minimum height of editor
+          maxHeight: null,             
+          toolbar: [
+            ['style', ['style']],
+            // [groupName, [list of button]]
+            ['fontname', ['fontname']],
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['backcolor', ['backcolor']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+          ]
+        });
+    });
+</script>
