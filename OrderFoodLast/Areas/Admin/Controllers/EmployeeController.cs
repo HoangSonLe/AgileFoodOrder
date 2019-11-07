@@ -59,7 +59,7 @@ namespace OrderFoodLast.Areas.Admin.Controllers
 
             var employees = _mapper.Map<List<EmployeeView>>(employeeList);
             int pageNumber = page ?? 1;
-            ViewBag.employeeViews = employees.ToPagedList(pageNumber, 1);
+            ViewBag.employeeViews = employees.ToPagedList(pageNumber, 2);
 
             return View(employees);
 
@@ -164,7 +164,6 @@ namespace OrderFoodLast.Areas.Admin.Controllers
                 }
 
                 emp.Status = int.Parse(data["status"]);
-                emp.CreatedDate = DateTime.Now;
                 emp.ModifiedBy = info.UserID;
                 emp.ModifiedDate = DateTime.Now;
                 _ctx.Employee.Update(emp);
@@ -199,7 +198,7 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             return strBuilder.ToString();
         }
 
-        [HttpPost]
+
         public IActionResult Delete(int id)
         {
             Employee emp = _ctx.Employee.SingleOrDefault(p => p.EmployeeId == id);
@@ -210,8 +209,9 @@ namespace OrderFoodLast.Areas.Admin.Controllers
 
         public IActionResult GetManagerPeople(int idRole)
         {
-            var roles = _ctx.Employee.Where(p => p.Role < idRole)
-                                    .Select(s => new {id = s.EmployeeId, name = (s.FirstName + " " + s.LastName) }).ToList();
+            LoginInfo info = HttpContext.Session.GetObject<LoginInfo>("Info");
+            var roles = _ctx.Employee.Where(p => p.Role < idRole && p.EmployeeId != info.role)
+                                    .Select(s => new {id = s.Role, name = (s.FirstName + " " + s.LastName) }).ToList();
             return Ok(Json(roles));
         }
 

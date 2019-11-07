@@ -8,6 +8,10 @@
     Employee emp = Model.ToList()[0] as Employee;
     IEnumerable<Employee> managers = Model.ToList()[1] as List<Employee>;
 }
+<div style="text-align:right">
+    <button class="btn btn-success" id="btnBack"><i class="fas fa-chevron-left"></i>&nbsp Trở về</button>
+</div>
+<br />
 <div class="row">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -24,7 +28,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <input type="text" name="EmployeeId" value="@emp.EmployeeId" hidden/>
+                    <input type="text" name="EmployeeId" value="@emp.EmployeeId" hidden />
                     <label>Họ</label>
                     <input type="text" class="form-control" placeholder="Nhập họ" name="firstName" value="@emp.FirstName" />
                 </div>
@@ -69,7 +73,7 @@
                         @if (info.role == 1)
                         {
 
-                            if (emp.Role == 1) 
+                            if (emp.Role == 1)
                             {
                                 <option selected value="1">Super Admin</option>
                             }
@@ -78,7 +82,7 @@
                                 <option value="1">Super Admin</option>
                             }
 
-                            if (emp.Role == 2) 
+                            if (emp.Role == 2)
                             {
                                 <option selected value="2">Admin</option>
                             }
@@ -87,7 +91,7 @@
                                 <option value="2">Admin</option>
                             }
 
-                            if (emp.Role == 3) 
+                            if (emp.Role == 3)
                             {
                                 <option selected value="3">Nhân Viên</option>
                             }
@@ -99,7 +103,7 @@
                         else if (info.role == 2)
                         {
 
-                            if (emp.Role == 2) 
+                            if (emp.Role == 2)
                             {
                                 <option selected value="2">Admin</option>
                             }
@@ -108,7 +112,7 @@
                                 <option value="2">Admin</option>
                             }
 
-                            if (emp.Role == 3) 
+                            if (emp.Role == 3)
                             {
                                 <option selected value="3">Nhân Viên</option>
                             }
@@ -121,7 +125,7 @@
                 </div>
                 <div class="form-group">
                     <label>Người quản lý</label>
-                    <select class="form-control" id="ManagerId"  name="managerId">
+                    <select class="form-control" id="ManagerId" name="managerId">
 
                         @if (managers != null)
                         {
@@ -181,10 +185,13 @@
                 success: function (data) {
                     $("#ManagerId").html("");
                     (data.value).forEach((e) => {
-                        $("#ManagerId").append(`<option value="${ e.id }">${e.name}</option>`);
+                        $("#ManagerId").append(`<option value="${e.id}">${e.name}</option>`);
                     });
                 }
             });
         });
     });
+    $("#btnBack").click(function () {
+        window.location = "/Admin/Employee";
+    })
 </script>

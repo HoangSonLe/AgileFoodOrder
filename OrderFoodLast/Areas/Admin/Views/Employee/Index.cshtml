@@ -49,8 +49,8 @@
                 <td>
                     <div class="btn-group">
                         <a href="/Admin/employee/@item.EmployeeId" class="btn btn-secondary"><i class="fas fa-info-circle"></i></a>
-                        <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-secondary"><i class="fas fa-trash"></i></a>
-                        <a id="updateEmp" data-id="@item.EmployeeId" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-secondary deleteEmp"><i class="fas fa-trash"></i></a>
+                        <a data-id="@item.EmployeeId" class="btn btn-secondary updateEmp"><i class="fas fa-edit"></i></a>
                     </div>
                 </td>
             </tr>
@@ -92,7 +92,7 @@
         });
     });
 
-    $("#updateEmp").click(function () {
+    $(".updateEmp").click(function () {
         var id = $(this).data("id");
         $.ajax({
             url: "/Admin/Employee/Edit",
@@ -107,4 +107,5 @@
             }
         });
     });
+
 </script>
