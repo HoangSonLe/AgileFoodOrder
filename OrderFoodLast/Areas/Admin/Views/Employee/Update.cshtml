@@ -20,16 +20,17 @@
     </div>
 </div>            <!-- content -->
 <div class="container">
-    <form asp-action="Edit" data-id="@emp.EmployeeId" method="post">
+    <form asp-action="Edit" asp-route-id="@emp.EmployeeId" method="post">
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
+                    <input type="text" name="EmployeeId" value="@emp.EmployeeId" hidden/>
                     <label>Họ</label>
-                    <input type="text" class="form-control" placeholder="Nhập họ" name="lastName" value="@emp.FirstName" />
+                    <input type="text" class="form-control" placeholder="Nhập họ" name="firstName" value="@emp.FirstName" />
                 </div>
                 <div class="form-group">
                     <label>Tên</label>
-                    <input type="text" class="form-control" placeholder="Nhập tên" name="firstName" value="@emp.LastName" />
+                    <input type="text" class="form-control" placeholder="Nhập tên" name="lastName" value="@emp.LastName" />
                 </div>
                 <div class="form-group">
                     <label>Tên đăng nhập</label>
@@ -61,7 +62,7 @@
                 </div>
                 <div class="form-group">
                     <label>Vai trò</label>
-                    <select class="form-control" name="role">
+                    <select class="form-control" id="idRole" name="role">
                         @{
                             LoginInfo info = Context.Session.GetObject<LoginInfo>("Info");
                         }
@@ -120,7 +121,7 @@
                 </div>
                 <div class="form-group">
                     <label>Người quản lý</label>
-                    <select class="form-control" name="managerId">
+                    <select class="form-control" id="ManagerId"  name="managerId">
 
                         @if (managers != null)
                         {
@@ -158,10 +159,32 @@
 
             <br>
             <div class="container mt-2 mb-4">
-                <a class="btn btn-success"><i class="fas fa-save"></i> Lưu thông tin</a>
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Lưu thông tin</button>
             </div>
         </div>
     </form>
 
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+
+    $(function () {
+        $("#idRole").change(function () {
+            $.ajax({
+                url: "/Admin/Employee/GetManagerPeople",
+                type: "GET",
+                data: {
+                    idRole: $(this).val()
+                },
+                success: function (data) {
+                    $("#ManagerId").html("");
+                    (data.value).forEach((e) => {
+                        $("#ManagerId").append(`<option value="${ e.id }">${e.name}</option>`);
+                    });
+                }
+            });
+        });
+    });
+</script>

@@ -48,6 +48,7 @@ namespace OrderFoodLast.Areas.Admin.Controllers
                 Name = p.FirstName + " " + p.LastName
             }).ToList();
             ViewData["Emp"] = list;
+            //Employee emp = _ctx.Employee.Where(p => p.EmployeeId == id).Include(o => o.Manager).Include(o => o.RoleNavigation).SingleOrDefault();
             return View(info);
         }
 
@@ -122,6 +123,7 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             int? checkRole = HttpContext.Session.GetObject<LoginInfo>("Info").role;
             Employee emp = _ctx.Employee.SingleOrDefault(p => p.EmployeeId == id);
 
+
             // xét quyền người đăng nhập có quyền được sửa không
             if (emp.Role <= checkRole && checkRole != 1)
             {
@@ -130,17 +132,8 @@ namespace OrderFoodLast.Areas.Admin.Controllers
 
             List<object> data = new List<object>();
             data.Add(emp);
-
-            if (checkRole==1) // employee is super admin
-            {
-                var managers = _ctx.Employee.Where(p => p.EmployeeId != id && p.Role >= 1).ToList();
-                data.Add(managers);              
-            }
-            else if (checkRole==2)
-            {
-                var managers = _ctx.Employee.Where(p => p.EmployeeId != id && p.Role >= 2).ToList();
-                data.Add(managers);
-            }
+            var managers = _ctx.Employee.Where(p => p.Role < emp.Role && p.EmployeeId != id ).ToList();
+            data.Add(managers);
             return View("Update", data);
         }
 
@@ -150,7 +143,7 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             try
             {
                 var info = HttpContext.Session.GetObject<LoginInfo>("Info");
-                Employee emp = _ctx.Employee.Find(id);
+                Employee emp = _ctx.Employee.SingleOrDefault(p=>p.EmployeeId== id);
                 emp.LastName = data["lastName"];
                 emp.FirstName = data["firstName"];
                 emp.UserName = data["userName"];
@@ -160,8 +153,16 @@ namespace OrderFoodLast.Areas.Admin.Controllers
                 emp.Phone = data["phone"];
                 emp.BirthDate = DateTime.Parse(data["birthday"]);
                 emp.Role = int.Parse(data["role"]);
-                
-                emp.ManagerId = String.IsNullOrEmpty(data["managerId"])? 0:int.Parse(data["managerId"]);
+
+                if (!String.IsNullOrEmpty(data["managerId"]))
+                {
+                    emp.ManagerId = int.Parse(data["managerId"]);
+                }
+                else
+                {
+                    emp.ManagerId = (int?)null;
+                }
+
                 emp.Status = int.Parse(data["status"]);
                 emp.CreatedDate = DateTime.Now;
                 emp.ModifiedBy = info.UserID;
@@ -174,6 +175,7 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
+
         }
 
         public static string MD5Hash(string text)
@@ -204,6 +206,13 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             _ctx.Employee.Remove(emp);
             _ctx.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public IActionResult GetManagerPeople(int idRole)
+        {
+            var roles = _ctx.Employee.Where(p => p.Role < idRole)
+                                    .Select(s => new {id = s.EmployeeId, name = (s.FirstName + " " + s.LastName) }).ToList();
+            return Ok(Json(roles));
         }
 
     }
