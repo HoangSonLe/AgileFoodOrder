@@ -1,4 +1,6 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+﻿@using Microsoft.AspNetCore.Http;
+@using OrderFoodLast.Helper
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
 
     <button type="button" id="sidebarCollapse" class="btn btn-info">
         <i class="fa fa-home"></i><span> Menu</span>
@@ -12,7 +14,11 @@
             <li class="nav-item">
                 <div class="btn-group dropleft">
                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Minh LC
+                        @{
+                            LoginInfo info = Context.Session.GetObject<LoginInfo>("Info");
+                            
+                        }
+                        @info.Name
                     </button>
                     <div class="dropdown-menu">
                         <div class="text-center">

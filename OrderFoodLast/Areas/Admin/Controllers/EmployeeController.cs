@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
@@ -64,15 +65,29 @@ namespace OrderFoodLast.Areas.Admin.Controllers
 
         }
         
-
-        [Route("Admin/Employee/Create")]
         public IActionResult Create()
         {
+            LoginInfo info = HttpContext.Session.GetObject<LoginInfo>("Info");
+            if (info.role == 3)
+            {
+                return BadRequest();
+            }
+
+            
+            if (info.role == 1) // employee is super admin
+            {
+                var managers = _ctx.Employee.ToList();
+                ViewBag.managers = managers;
+            }
+            else if (info.role == 2)
+            {
+                var managers = _ctx.Employee.Where(p => p.Role >= 2).ToList();
+                ViewBag.managers = managers;
+            }
             return View();
         }
 
         [HttpPost]
-        [Route("Admin/Employee/Create")]
         public IActionResult Create(IFormCollection data)
         {
             try
@@ -102,21 +117,39 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             }
         }
 
-
-        //[Route("Admin/Employee/Update/{id}")]
         public IActionResult Edit(int id)
         {
+            int? checkRole = HttpContext.Session.GetObject<LoginInfo>("Info").role;
             Employee emp = _ctx.Employee.SingleOrDefault(p => p.EmployeeId == id);
-            return View("Update",emp);
+
+            // xét quyền người đăng nhập có quyền được sửa không
+            if (emp.Role <= checkRole && checkRole != 1)
+            {
+                return BadRequest();
+            }
+
+            List<object> data = new List<object>();
+            data.Add(emp);
+
+            if (checkRole==1) // employee is super admin
+            {
+                var managers = _ctx.Employee.Where(p => p.EmployeeId != id && p.Role >= 1).ToList();
+                data.Add(managers);              
+            }
+            else if (checkRole==2)
+            {
+                var managers = _ctx.Employee.Where(p => p.EmployeeId != id && p.Role >= 2).ToList();
+                data.Add(managers);
+            }
+            return View("Update", data);
         }
 
         [HttpPost]
-        //[Route("Admin/Employee/Update/{id}")]
         public IActionResult Edit(int id, IFormCollection data)
         {
             try
             {
-                //var info = HttpContext.Session.GetObject<LoginInfo>("Info");
+                var info = HttpContext.Session.GetObject<LoginInfo>("Info");
                 Employee emp = _ctx.Employee.Find(id);
                 emp.LastName = data["lastName"];
                 emp.FirstName = data["firstName"];
@@ -131,7 +164,7 @@ namespace OrderFoodLast.Areas.Admin.Controllers
                 emp.ManagerId = String.IsNullOrEmpty(data["managerId"])? 0:int.Parse(data["managerId"]);
                 emp.Status = int.Parse(data["status"]);
                 emp.CreatedDate = DateTime.Now;
-                //emp.ModifiedBy = info.UserID;
+                emp.ModifiedBy = info.UserID;
                 emp.ModifiedDate = DateTime.Now;
                 _ctx.Employee.Update(emp);
                 _ctx.SaveChanges();
@@ -141,7 +174,6 @@ namespace OrderFoodLast.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-            //
         }
 
         public static string MD5Hash(string text)
@@ -166,7 +198,6 @@ namespace OrderFoodLast.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Route("Admin/Employee/Delete")]
         public IActionResult Delete(int id)
         {
             Employee emp = _ctx.Employee.SingleOrDefault(p => p.EmployeeId == id);
