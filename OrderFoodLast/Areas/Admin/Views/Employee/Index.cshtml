@@ -14,8 +14,7 @@
                 </li>
                 <li class="breadcrumb-item active">
                     <div class="btn-group" role="group">
-                        <a href="add-product.html" class="btn btn-outline-success"><i class="fas fa-plus"></i> Thêm mới</a>
-                        <button type="button" class="btn btn-outline-primary">Thống kê</button>
+                        <a id="addEmp" class="btn btn-outline-success"><i class="fas fa-plus"></i> Thêm mới</a>
                     </div>
                 </li>
             </ol>
@@ -51,7 +50,7 @@
                     <div class="btn-group">
                         <a href="/Admin/employee/@item.EmployeeId" class="btn btn-secondary"><i class="fas fa-info-circle"></i></a>
                         <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-secondary"><i class="fas fa-trash"></i></a>
-                        <a asp-action="Edit" asp-route-id="@item.EmployeeId" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                        <a id="updateEmp" data-id="@item.EmployeeId" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
                     </div>
                 </td>
             </tr>
@@ -76,4 +75,36 @@
     $('ul.pagination > li > span').addClass('page-link');
     $('ul.pagination > li.active').addClass('active');
     $('ul.pagination > li > a').addClass('page-link');
+</script>
+
+<script>
+    $("#addEmp").click(function () {
+        $.ajax({
+            url: "/Admin/Employee/Create",
+            type: "GET",
+            success: function (response) {
+                $(".container .container").html("");
+                $(".container .container").html(response);
+            },
+            error: function (response) {
+                alert("Bạn không được quyền tạo tài khoản");
+            }
+        });
+    });
+
+    $("#updateEmp").click(function () {
+        var id = $(this).data("id");
+        $.ajax({
+            url: "/Admin/Employee/Edit",
+            type: "GET",
+            data: { id: id},
+            success: function (response) {
+                $(".container .container").html("");
+                $(".container .container").html(response);
+            },
+            error: function (response) {
+                alert("Bạn không được quyền chỉnh sửa tài khoản người này");
+            }
+        });
+    });
 </script>
