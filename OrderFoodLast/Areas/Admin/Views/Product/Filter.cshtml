@@ -41,27 +41,30 @@
 <div class="container">
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <select id="inputPagination" class="page-link" height="20px" ; style="height:38px">
-                @for (int i = 1; i <= ViewBag.TongSoTrang; ++i)
-                {
-                    var valOption = i - 1;
-                    if (valOption == ViewBag.SelectedPage)
-                    {
-                        <option selected value="@valOption">@i</option>
-                    }
-                    else
-                    {
-
-                        <option value="@valOption">@i</option>
-                    }
-
-                }
-            </select>
             <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link btnPrevious" href="" >Previous</a>
+            </li>
+            <li class="page-item">
+                <select id="inputPagination" class="page-link" height="20px" ; style="height:38px">
+                    @for (int i = 1; i <= ViewBag.TongSoTrang; ++i)
+                    {
+                        var valOption = i - 1;
+                        if (valOption == ViewBag.SelectedPage)
+                        {
+                            <option selected value="@valOption">@i</option>
+                        }
+                        else
+                        {
+
+                            <option value="@valOption">@i</option>
+                        }
+
+                    }
+                </select>
+            </li>
+           
+            <li class="page-item">
+                <a class="page-link btnNext" href="">Next</a>
             </li>
         </ul>
     </nav>
@@ -84,6 +87,7 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script src="~/js/Admin/Product.js"></script>
 
 
